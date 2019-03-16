@@ -14,16 +14,17 @@
     float: left;
 
     text-align: right;
-    width: auto;min-width: 20%
+    width: auto;
+    min-width: 20%
 }
 
-.epii .form-group input, .epii .form-group select,.epii .form-group textarea,.epii .form-group .epii-filed {
+.epii .form-group input, .epii .form-group select, .epii .form-group textarea, .epii .form-group .epii-filed {
     float: left;
     width: 70%;
     text-align: left;
 }
 
-.epii .form-group input.error, .epii  .form-group select.error,.epii  .form-group textarea.error,.epii  .form-group .epii-filed  .error {
+.epii .form-group input.error, .epii .form-group select.error, .epii .form-group textarea.error, .epii .form-group .epii-filed .error {
     width: 40%;
 
 }
@@ -33,7 +34,7 @@
     text-align: right;
 }
 
-.epii  .form-group label.error {
+.epii .form-group label.error {
     float: left;
     width: 30%;
 
@@ -41,21 +42,31 @@
     text-align: left;
 
 }
-.form-group  label.error{
+
+.form-group label.error {
     color: red;
 }
 
-
-.epii .form-group input[type=radio],.epii .form-group input[type=checkbox]{
-    float: none!important;
-    width: auto!important;
+.epii .form-group input[type=radio], .epii .form-group input[type=checkbox] {
+    float: none !important;
+    width: auto !important;
 }
 
 .card-body {
-    padding: 0.5rem 1.25rem!important;
+    padding: 0.5rem 1.25rem !important;
 
 }
- .card-header {
-    padding: 0.6rem 1.25rem!important;
 
+.card-header {
+    padding: 0.6rem 1.25rem !important;
+
+}
+
+.epii-plr-10 {
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+}
+.epii-plr-5 {
+    padding-right: 5px !important;
+    padding-left: 5px !important;
 }
