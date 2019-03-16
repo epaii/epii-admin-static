@@ -66,7 +66,80 @@
     padding-right: 10px !important;
     padding-left: 10px !important;
 }
+
 .epii-plr-5 {
     padding-right: 5px !important;
     padding-left: 5px !important;
+}
+
+.sidebar-dark-primary {
+    background-color: #343a40;
+}
+
+.sidebar-bg-0b1c2d-primary .user-panel a:hover {
+    color: #0b1c2d;
+}
+
+.sidebar-dark-primary .user-panel .status {
+    color: #C2C7D0;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-dark-primary .user-panel .status:hover, .sidebar-dark-primary .user-panel .status:focus, .sidebar-dark-primary .user-panel .status:active {
+    color: #ffffff;
+    background: rgba(245, 255, 240, 0.1);
+}
+
+.sidebar-dark-primary .user-panel .dropdown-menu {
+    border-color: rgba(238, 255, 230, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.sidebar-dark-primary .user-panel .dropdown-item {
+    color: #212529;
+}
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link:active, .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link:focus {
+    color: #C2C7D0;
+}
+
+.sidebar-dark-primary .nav-sidebar > .nav-item.menu-open > .nav-link, .sidebar-dark-primary .nav-sidebar > .nav-item:hover > .nav-link {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active {
+    color: #ffffff;
+    background-color: #007bff;
+}
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-treeview {
+    background: transparent;
+}
+
+.sidebar-dark-primary .nav-header {
+    color: #d0d4db;
+    background: inherit;
+}
+
+.sidebar-dark-primary .sidebar a {
+    color: #C2C7D0;
+}
+
+.sidebar-dark-primary .sidebar a:hover {
+    text-decoration: none;
+}
+
+.sidebar-dark-primary .nav-treeview > .nav-item > .nav-link {
+    color: #C2C7D0;
+}
+
+.sidebar-dark-primary .nav-treeview > .nav-item > .nav-link:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-dark-primary .nav-treeview > .nav-item > .nav-link.active, .sidebar-dark-primary .nav-treeview > .nav-item > .nav-link.active:hover {
+    color: #ffffff;
+    background-color: #007bff;
 }
