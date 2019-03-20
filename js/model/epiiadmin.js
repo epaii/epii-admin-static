@@ -119,7 +119,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
             var offset = epiiAdmin.tools.query("_offset", url);
             if (!offset)
             {
-                offset = "50px";
+                offset = (area&& (area != "100%,100%") )?"50px":"auto";
             }
 
             var mylayer = epiiAdmin.tools.getLayer(intop);
