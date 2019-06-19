@@ -11,7 +11,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
 
     var this_window_id = Args.window_id;
     window.this_window_id = this_window_id;
-    if (window.top != window.self) {
+    if ( (window.top != window.self  ) && window.top.EpiiAdmin) {
         epiiAdmin = window.top.EpiiAdmin;
         epiiAdmin.bindWindow(this_window_id, window);
 
