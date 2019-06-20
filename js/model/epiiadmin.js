@@ -12,13 +12,20 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
     var this_window_id = Args.window_id;
     window.this_window_id = this_window_id;
 
-    try{
-        if ( (window.top != window.self  ) && window.top.EpiiAdmin) {
+    var need_new = false;
+    try {
+        if ((window.top != window.self) && window.top.EpiiAdmin) {
             epiiAdmin = window.top.EpiiAdmin;
             epiiAdmin.bindWindow(this_window_id, window);
 
+        } else {
+            need_new = true;
         }
-    }catch (e) {
+    } catch (e) {
+        need_new = true;
+    }
+
+    if (need_new) {
 
 
         epiiAdmin.windows = [];
@@ -122,9 +129,8 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
             title = title ? title : epiiAdmin.tools.query("title", url);
 
             var offset = epiiAdmin.tools.query("_offset", url);
-            if (!offset)
-            {
-                offset = (area&& (area != "100%,100%") )?"50px":"auto";
+            if (!offset) {
+                offset = (area && (area != "100%,100%")) ? "50px" : "auto";
             }
 
             var mylayer = epiiAdmin.tools.getLayer(intop);
@@ -137,7 +143,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
                 content: url,
                 mylayer: mylayer,
                 in_window: epiiAdmin.this_window,
-                offset:offset,
+                offset: offset,
                 success: function (layero, index) {
                     var openwindow = $(layero).find("iframe")[0].contentWindow;
                     var close_wind_id = openwindow.Args.window_id;
@@ -424,7 +430,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
 
 
 //auto form
-    var forms, tables, citys, selects,input_search,uploads;
+    var forms, tables, citys, selects, input_search, uploads;
     if ((forms = $("form[data-form=1]")) && forms.length > 0) {
         require(['form'], function (Form) {
             Form(forms);
@@ -450,18 +456,17 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
         });
     }
     if ((input_search = $('[data-input-search="1"]')) && selects.length > 0) {
-            require(['input-search'],function (epii_search) {
+        require(['input-search'], function (epii_search) {
 
-                epii_search.init(input_search);
-            })
+            epii_search.init(input_search);
+        })
     }
     if ((uploads = $('[data-upload="1"]')) && uploads.length > 0) {
-        require(['epii-upload'],function (epii_uploads) {
+        require(['epii-upload'], function (epii_uploads) {
 
             epii_uploads.init(uploads);
         })
     }
-
 
 
 //auto a or btn
