@@ -12,7 +12,7 @@ require.config({
     paths: {
         "jquery": Args.pluginsUrl + "jquery/jquery" + Args.min,
         "bootstrap": Args.pluginsUrl + "bootstrap/js/bootstrap.bundle" + Args.min,
-        "addtabs": Args.pluginsUrl + "bootStrap-addTabs/bootstrap.addtabs" + Args.min,
+        "addtabs": Args.pluginsUrl + "bootStrap-addTabs/bootstrap.addtabs"  ,
         "adminlte": Args.pluginsUrl + "adminlte/adminlte" + Args.min,
         "epiiadminJs": "model/epiiadmin",
         "layer": Args.pluginsUrl + "layer/layer",

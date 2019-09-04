@@ -475,16 +475,28 @@
         } else if (settings.iframe == true && (opts.ajax == 'false' || !opts.ajax)) { //没有内容，使用IFRAME打开链接
 
 
-            content.html(
-                $('<iframe>', {
-                    'class': 'iframeClass',
-                    'height': settings.height,
-                    'frameborder': "no",
-                    'border': "0",
-                    'src': opts.url,
+            var epii_iframe = $('<iframe>', {
+                'class': 'iframeClass',
+                'height': settings.height,
+                'frameborder': "no",
+                'border': "0",
+                'src': opts.url,
 
-                })
-            );
+            });
+
+            epii_iframe[0].onload = function()
+            {
+                var iframeWin = epii_iframe[0].contentWindow || epii_iframe[0].contentDocument.parentWindow;
+
+                if (iframeWin.document.body) {
+
+                    var hie =  iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+
+                    if (hie>settings.height.replace("px","")-0)
+                    epii_iframe[0].style.height =(hie )+"px";
+                }
+            };
+            content.html(epii_iframe);
         } else {
             var ajaxOption = $.extend(settings.ajax, opts.ajax || {});
             ajaxOption.url = opts.url;
