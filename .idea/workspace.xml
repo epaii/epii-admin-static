@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e20e6e83-d848-438d-99f2-a65a84b2a226" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/js/plugins/bootStrap-addTabs/bootstrap.addtabs.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/plugins/bootStrap-addTabs/bootstrap.addtabs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/plugins/bootStrap-addTabs/bootstrap.addtabs.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/plugins/bootStrap-addTabs/bootstrap.addtabs.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/run.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/run.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -17,11 +17,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="bootstrap.addtabs.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="bootstrap.addtabs.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/plugins/bootStrap-addTabs/bootstrap.addtabs.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
-              <caret line="483" lean-forward="true" selection-start-line="483" selection-end-line="483" />
+            <state relative-caret-position="88">
+              <caret line="4" column="2" lean-forward="true" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bootstrap.addtabs.min.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/js/plugins/bootStrap-addTabs/bootstrap.addtabs.min.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="596">
+              <caret line="621" column="2" selection-start-line="621" selection-start-column="2" selection-end-line="621" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -29,8 +38,8 @@
       <file leaf-file-name="run.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/run.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="12" column="63" lean-forward="true" selection-start-line="12" selection-start-column="63" selection-end-line="12" selection-end-column="63" />
+            <state relative-caret-position="440">
+              <caret line="20" column="36" lean-forward="true" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -65,8 +74,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/js/run.js" />
         <option value="$PROJECT_DIR$/js/plugins/bootStrap-addTabs/bootstrap.addtabs.js" />
+        <option value="$PROJECT_DIR$/js/run.js" />
+        <option value="$PROJECT_DIR$/js/plugins/bootStrap-addTabs/bootstrap.addtabs.min.js" />
       </list>
     </option>
   </component>
@@ -91,8 +101,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="595" />
-    <option name="y" value="103" />
+    <option name="x" value="686" />
+    <option name="y" value="227" />
     <option name="width" value="1730" />
     <option name="height" value="1162" />
   </component>
@@ -178,15 +188,15 @@
       <option name="presentableId" value="Default" />
       <updated>1567156709195</updated>
       <workItem from="1567156712939" duration="848000" />
-      <workItem from="1567586640297" duration="1917000" />
+      <workItem from="1567586640297" duration="3077000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2765000" />
+    <option name="totallyTimeSpent" value="3925000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="595" y="103" width="1730" height="1162" extended-state="0" />
+    <frame x="686" y="227" width="1730" height="1162" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24985372" />
@@ -197,7 +207,7 @@
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32957748" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -224,15 +234,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/run.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="12" column="63" lean-forward="true" selection-start-line="12" selection-start-column="63" selection-end-line="12" selection-end-column="63" />
+        <state relative-caret-position="440">
+          <caret line="20" column="36" lean-forward="true" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/plugins/bootStrap-addTabs/bootstrap.addtabs.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="483" lean-forward="true" selection-start-line="483" selection-end-line="483" />
+        <state relative-caret-position="88">
+          <caret line="4" column="2" lean-forward="true" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/plugins/bootStrap-addTabs/bootstrap.addtabs.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="596">
+          <caret line="621" column="2" selection-start-line="621" selection-start-column="2" selection-end-line="621" selection-end-column="2" />
         </state>
       </provider>
     </entry>
