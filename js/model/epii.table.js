@@ -38,8 +38,8 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
     }
 
 
-    out.filedclick = function (json,fun,index) {
-        window[fun](JSON.parse(json),index);
+    out.filedclick = function (json, fun, index) {
+        window[fun](JSON.parse(json), index);
     };
 
     out.refreshTable = function (tableid) {
@@ -140,7 +140,6 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
             }
 
 
-
             if (filed_style = row[filedName(field, "style")]) {
 
                 value.css(filed_style);
@@ -150,7 +149,7 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
             }
 
             if (this["click"]) {
-                value.attr("onclick","window.epii_table.filedclick('"+JSON.stringify(row)+"','"+this["click"]+"','"+index+"')");
+                value.attr("onclick", "window.epii_table.filedclick('" + JSON.stringify(row) + "','" + this["click"] + "','" + index + "')");
 
             }
 
@@ -193,7 +192,6 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
         arguments[0] = value;
 
 
-
         return formatter.apply(this, arguments);
 
 
@@ -203,9 +201,9 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
         var btns_args = arguments;
 
         var btnmoban = {
-            edit: '<a href="' + EpiiAdmin.tools.replaceInData(this.editUrl ? this.editUrl : "", row) + '" class="btn btn-outline-info btn-sm    btn-dialog " data-area="'+(this.area?this.area:"100%,100%")+'"  title="' + EpiiAdmin.tools.replaceInData(this.editTitle ? this.editTitle : "", row) + '"><i class="fa fa-pencil"></i>编辑</a>',
-            edit_addtab: '<a href="' + EpiiAdmin.tools.replaceInData(this.editUrl ? this.editUrl : "", row) + '" class="btn btn-outline-info btn-sm   btn-addtab " data-area="'+(this.area?this.area:"100%,100%")+'"   title="' + EpiiAdmin.tools.replaceInData(this.editTitle ? this.editTitle : "", row) + '"><i class="fa fa-pencil"></i>编辑</a>',
-            detail: '<a href="' + EpiiAdmin.tools.replaceInData(this.detailUrl ? this.detailUrl : "", row) + '" class="btn btn-outline-primary btn-sm  btn-dialog " data-area="'+(this.area?this.area:"100%,100%")+'"   title="' + EpiiAdmin.tools.replaceInData(this.detailTitle ? this.detailTitle : "", row) + '"><i class="fa fa-list"></i>详情</a>',
+            edit: '<a href="' + EpiiAdmin.tools.replaceInData(this.editUrl ? this.editUrl : "", row) + '" class="btn btn-outline-info btn-sm    btn-dialog " data-area="' + (this.area ? this.area : "100%,100%") + '"  title="' + EpiiAdmin.tools.replaceInData(this.editTitle ? this.editTitle : "", row) + '"><i class="fa fa-pencil"></i>编辑</a>',
+            edit_addtab: '<a href="' + EpiiAdmin.tools.replaceInData(this.editUrl ? this.editUrl : "", row) + '" class="btn btn-outline-info btn-sm   btn-addtab " data-area="' + (this.area ? this.area : "100%,100%") + '"   title="' + EpiiAdmin.tools.replaceInData(this.editTitle ? this.editTitle : "", row) + '"><i class="fa fa-pencil"></i>编辑</a>',
+            detail: '<a href="' + EpiiAdmin.tools.replaceInData(this.detailUrl ? this.detailUrl : "", row) + '" class="btn btn-outline-primary btn-sm  btn-dialog " data-area="' + (this.area ? this.area : "100%,100%") + '"   title="' + EpiiAdmin.tools.replaceInData(this.detailTitle ? this.detailTitle : "", row) + '"><i class="fa fa-list"></i>详情</a>',
             detail_addtab: '<a href="' + EpiiAdmin.tools.replaceInData(this.detailUrl ? this.detailUrl : "", row) + '" class="btn btn-outline-primary btn-sm   btn-addtab " title="' + EpiiAdmin.tools.replaceInData(this.detailTitle ? this.detailTitle : "", row) + '"><i class="fa fa-list"></i>详情</a>',
             del: '<a href="' + EpiiAdmin.tools.replaceInData(this.delUrl ? this.delUrl : "", row) + '" class="btn btn-outline-danger btn-sm   btn-confirm " data-ajax="1" data-on-ok="tag.a" data-msg="' + EpiiAdmin.tools.replaceInData(this.delMsg ? this.delMsg : "确定要删除吗？", row) + '"   data-title="' + EpiiAdmin.tools.replaceInData(this.delTitle ? this.delTitle : "删除提示", row) + '"><i class="fa fa-trash"></i>删除</a>',
 
@@ -227,9 +225,16 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
 
     };
     formatter.a = function (value, row, index, field) {
+
         this.tagName = "a";
-        if (!arguments[0]) {
-            arguments[0] = EpiiAdmin.tools.replaceInData(this.value, row);
+        if (arguments[0] === undefined) {
+            if (this.value)
+                arguments[0] = EpiiAdmin.tools.replaceInData(this.value, row);
+            else {
+                // console.log(this);
+                arguments[0] = EpiiAdmin.getTrueValue(this.title, this.pageTitle);
+            }
+
         }
         return formatter.apply(this, arguments);
     };
