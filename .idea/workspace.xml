@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e20e6e83-d848-438d-99f2-a65a84b2a226" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/model/epii.table.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/model/epii.table.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gitpush.sh" beforeDir="false" afterPath="$PROJECT_DIR$/gitpush.sh" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -44,15 +43,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="epii.table.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="epii.table.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/model/epii.table.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
-              <caret line="233" column="18" selection-start-line="233" selection-start-column="18" selection-end-line="233" selection-end-column="18" />
+            <state relative-caret-position="2607">
+              <caret line="225" column="6" lean-forward="true" selection-start-line="225" selection-start-column="6" selection-end-line="225" selection-end-column="6" />
               <folding>
                 <element signature="n#style#0;n#i#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#i#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gitpush.sh" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/gitpush.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="88">
+              <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -109,6 +117,7 @@
         <option value="$PROJECT_DIR$/js/run.js" />
         <option value="$PROJECT_DIR$/js/plugins/bootStrap-addTabs/bootstrap.addtabs.min.js" />
         <option value="$PROJECT_DIR$/js/model/epii.table.js" />
+        <option value="$PROJECT_DIR$/gitpush.sh" />
       </list>
     </option>
   </component>
@@ -133,8 +142,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="686" />
-    <option name="y" value="191" />
+    <option name="x" value="283" />
+    <option name="y" value="23" />
     <option name="width" value="1730" />
     <option name="height" value="1162" />
   </component>
@@ -150,38 +159,6 @@
             <path>
               <item name="epiiadmin-js" type="b2602c69:ProjectViewProjectNode" />
               <item name="epiiadmin-js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="epiiadmin-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="epiiadmin-js" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="epiiadmin-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="epiiadmin-js" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="epiiadmin-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="epiiadmin-js" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="plugins" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="epiiadmin-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="epiiadmin-js" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="plugins" type="462c0819:PsiDirectoryNode" />
-              <item name="bootStrap-addTabs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="epiiadmin-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="epiiadmin-js" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="plugins" type="462c0819:PsiDirectoryNode" />
-              <item name="bootStrap-addTabs" type="462c0819:PsiDirectoryNode" />
-              <item name="bootstrap.addtabs.js" type="620a8d5e:NestingTreeNode" />
             </path>
           </expand>
           <select />
@@ -222,15 +199,15 @@
       <workItem from="1567156712939" duration="848000" />
       <workItem from="1567586640297" duration="6324000" />
       <workItem from="1568084039547" duration="41000" />
-      <workItem from="1568167732027" duration="1101000" />
+      <workItem from="1568167732027" duration="1955000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8314000" />
+    <option name="totallyTimeSpent" value="9168000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="686" y="191" width="1730" height="1162" extended-state="0" />
+    <frame x="283" y="23" width="1730" height="1162" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24985372" />
@@ -405,12 +382,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/model/epii.table.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="233" column="18" selection-start-line="233" selection-start-column="18" selection-end-line="233" selection-end-column="18" />
+        <state relative-caret-position="2607">
+          <caret line="225" column="6" lean-forward="true" selection-start-line="225" selection-start-column="6" selection-end-line="225" selection-end-column="6" />
           <folding>
             <element signature="n#style#0;n#i#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#i#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gitpush.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
         </state>
       </provider>
     </entry>
