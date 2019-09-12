@@ -231,7 +231,11 @@ define(["adminlte", "addtabs"], function (AdminLTE, Addtabs) {
     $(".sidebar").on('click', ".has-treeview", function (e) {
 
         $(this).siblings().removeClass("menu-open");
-        $(this).addClass("menu-open");
+        if($(this).hasClass("menu-open")){
+            $(this).removeClass("menu-open");
+        }else{
+            $(this).addClass("menu-open");
+        }
     });
 
 
