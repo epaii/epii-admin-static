@@ -143,3 +143,11 @@
     color: #ffffff;
     background-color: #007bff;
 }
+
+
+ .form-inline .form-group{
+     margin:7px;
+ }
+.form-inline button{
+    margin: 3px;
+}
