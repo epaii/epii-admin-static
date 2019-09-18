@@ -20,6 +20,7 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
 
         tables.each(function () {
             if (defualt_table === null) defualt_table = $(this);
+
             $(this).bootstrapTable({
                 method: 'POST',
                 dataType: 'json',
@@ -29,7 +30,20 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
                 idField: EpiiAdmin.getTrueValue($(this).data("id-field"), "id"),
                 pagination: true,
                 sidePagination: EpiiAdmin.getTrueValue($(this).data("side-pagination"), "server"),
-                pageSize: EpiiAdmin.getTrueValue($(this).data("page-size"), 30)
+                pageSize: EpiiAdmin.getTrueValue($(this).data("page-size"), 30),
+                onLoadSuccess: function () {
+
+                },
+                onResetView: function () {
+                    if ((this.totalRows - 0 > 0) && (window.changeThisIframeHeight)) {
+                        setTimeout(function () {
+
+                            window.changeThisIframeHeight();
+                        }, 10);
+                    }
+
+
+                }
 
             });
         });
