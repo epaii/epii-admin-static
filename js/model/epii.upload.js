@@ -175,7 +175,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
                     $(button).prop("disabled", false).html($(button).data("bakup-html"));
                     var onDomUploadSuccess = $(button).data("upload-complete");
                     if (onDomUploadSuccess && window[onDomUploadSuccess] && (typeof window[onDomUploadSuccess] == "function")) {
-                        window[onDomUploadSuccess](up, response);
+                        window[onDomUploadSuccess](up, response?response:null);
                     }
                 },
                 Error: function (up, err) {
