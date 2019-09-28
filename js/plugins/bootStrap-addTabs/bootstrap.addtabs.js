@@ -361,7 +361,7 @@
 
         var id = opts.tabid ? opts.tabid : 'tab_' + opts.id;
         opts.tabid = id;
-        $.addtabs.current_id=  id;
+        $.addtabs.current_id = id;
         var tab_li = a_target;
         //写入cookie
         if (settings.store) {
@@ -376,7 +376,7 @@
             tabs[id].active = 'true';
             tabs = JSON.stringify(tabs);
             _store('addtabs' + settings.storeName, tabs);
-            opts.refresh= old_re;
+            opts.refresh = old_re;
         }
 
         var tab_content = $(settings.tab_content);
@@ -484,16 +484,16 @@
 
             });
 
-            epii_iframe[0].onload = function()
-            {
-                var iframeWin = epii_iframe[0].contentWindow || epii_iframe[0].contentDocument.parentWindow;
+            epii_iframe[0].onload = function () {
 
+                var iframeWin = epii_iframe[0].contentWindow || epii_iframe[0].contentDocument.parentWindow;
+                iframeWin.tab_id = id;
                 if (iframeWin.document.body) {
 
-                    var hie =  iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+                    var hie = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
 
-                    if (hie>settings.height.replace("px","")-0)
-                    epii_iframe[0].style.height =(hie )+"px";
+                    if (hie > settings.height.replace("px", "") - 0)
+                        epii_iframe[0].style.height = (hie) + "px";
                 }
             };
             content.html(epii_iframe);

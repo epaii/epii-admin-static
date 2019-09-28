@@ -281,6 +281,9 @@ define(["adminlte", "addtabs"], function (AdminLTE, Addtabs) {
 
 
         window.EpiiAdmin.addtabs = Addtabs;
+        window.EpiiAdmin.closeThis = function () {
+            EpiiAdmin.addtabs.close({id: EpiiAdmin.addtabs.current_id});
+        };
         window.EpiiAdmin.reload = Addtabs.reload_next;
         window.EpiiAdmin.AdminLTE = AdminLTE;
 
