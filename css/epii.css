@@ -144,10 +144,22 @@
     background-color: #007bff;
 }
 
+.form-inline .form-group {
+    margin: 7px;
+}
 
- .form-inline .form-group{
-     margin:7px;
- }
-.form-inline button{
+.form-inline button {
     margin: 3px;
+}
+
+.label30 label {
+    min-width: 30% !important;
+}
+
+.label10 label {
+    min-width: 10% !important;
+}
+
+.label15 label {
+    min-width: 15% !important;
 }
