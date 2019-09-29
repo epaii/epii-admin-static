@@ -68,7 +68,6 @@ define(["adminlte", "addtabs"], function (AdminLTE, Addtabs) {
         }
 
 
-
         $main_header.addClass(color);
         whenSkinsChange("navbar", color);
     });
@@ -231,9 +230,9 @@ define(["adminlte", "addtabs"], function (AdminLTE, Addtabs) {
     $(".sidebar").on('click', ".has-treeview", function (e) {
 
         $(this).siblings().removeClass("menu-open");
-        if($(this).hasClass("menu-open")){
+        if ($(this).hasClass("menu-open")) {
             $(this).removeClass("menu-open");
-        }else{
+        } else {
             $(this).addClass("menu-open");
         }
     });
@@ -277,6 +276,26 @@ define(["adminlte", "addtabs"], function (AdminLTE, Addtabs) {
         $.addtabs.reloadById($.addtabs.current_id);
     });
 
+
+    function reload_menu_badge(menu_id) {
+        if (Args.pluginsData && Args.pluginsData.menu_badge_api) {
+            if (!menu_id) menu_id = "";
+            $.getJSON(Args.pluginsData.menu_badge_api, {menu_id: menu_id}, function (data) {
+                if (data && (data["code"] - 1 === 0) && (data["data"]) && (data["data"]["list"])) {
+                    if (data["data"]["list"].length > 0) {
+                        data["data"]["list"].map(function (item) {
+                            // console.log(item);
+                            var li = $("[data-addtab=" + item.id + "]");
+                            li.find("span").remove();
+                            li.find("p").append(item.span);
+                        });
+                    }
+                }
+            });
+        }
+
+    }
+
     if (window.EpiiAdmin) {
 
 
@@ -288,6 +307,7 @@ define(["adminlte", "addtabs"], function (AdminLTE, Addtabs) {
         window.EpiiAdmin.AdminLTE = AdminLTE;
 
         window.EpiiAdmin.Pushmenu = new AdminLTE.PushMenu();
+        window.EpiiAdmin.reload_menu_badge = reload_menu_badge;
     }
     // setTimeout(function () {
     //     $.addtabs.reload_next("data");
