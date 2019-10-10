@@ -163,7 +163,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
                         img.show();
 
                     }else if (imgs_ul_id &&  $(button).data("multiple")) {
-                        $("#"+imgs_ul_id).append("<img onclick='UploadComplete()' src=\""+response.url+"\" style='padding:26px ;width:200px !important; border:0.5px solid #dcdcdc;margin: 24px 3px; "+img_style+"'><text ><i class=\"fa fa-times\" aria-hidden=\"true\"></i></text>");
+                        $("#"+imgs_ul_id).append("<div style='position: relative'><img onclick='UploadComplete()' src=\""+response.url+"\" style='padding:26px ;width:200px !important; border:0.5px solid #dcdcdc;margin: 24px 3px; "+img_style+"'><text style='position: absolute'><i class=\"fa fa-times\" aria-hidden=\"true\"></i></text></div>");
 
                         $("#"+imgs_ul_id).show();
 
