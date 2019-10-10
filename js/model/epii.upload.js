@@ -172,38 +172,37 @@ define(["plupload", "jquery"], function (Plupload, $) {
                         if (img_style)
                             img.attr("style",img_style);
                         img.show();
-                        console.log(response.url);
-                        return;
+
                     }else if (imgs_ul_id &&  $(button).data("multiple")) {
                         $("#"+imgs_ul_id).append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img'  src=\""+response.url+"\" style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'></div>");
 
                         $("#"+imgs_ul_id).show();
-                        // var name = files[0].name
-                        // var type = name.split('.')
-                        // console.log(type);
+                        var name = files[0].name
+                        var type = name.split('.')
+                        console.log(type);
 
-                        // switch(type[1]){
-                        //     case "zip":
-                        //         //执行代码
-                        //         $("#"+imgs_ul_id).append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img' src='https://www.easyicon.net/api/resizeApi.php?id=1169012&size=128' style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'></div>");
-                        //
-                        //         $("#"+imgs_ul_id).show();
-                        //         break;
-                        //     case "pdf":
-                        //         //执行代码
-                        //         $("#"+imgs_ul_id).append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img' src='https://www.easyicon.net/api/resizeApi.php?id=1205624&size=128' style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'></div>");
-                        //
-                        //         $("#"+imgs_ul_id).show();
-                        //         break;
-                        //     case "docx":
-                        //         //执行代码
-                        //         $("#"+imgs_ul_id).append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img' src='https://www.easyicon.net/api/resizeApi.php?id=1176733&size=128' style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'></div>");
-                        //
-                        //         $("#"+imgs_ul_id).show();
-                        //         break;
-                        //     default:
-                        //
-                        // }
+                        switch(type[1]){
+                            case "zip":
+                                //执行代码
+                                $("#"+imgs_ul_id).append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img' src='https://www.easyicon.net/api/resizeApi.php?id=1169012&size=128' style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'></div>");
+
+                                $("#"+imgs_ul_id).show();
+                                break;
+                            case "pdf":
+                                //执行代码
+                                $("#"+imgs_ul_id).append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img' src='https://www.easyicon.net/api/resizeApi.php?id=1205624&size=128' style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'></div>");
+
+                                $("#"+imgs_ul_id).show();
+                                break;
+                            case "docx":
+                                //执行代码
+                                $("#"+imgs_ul_id).append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img' src='https://www.easyicon.net/api/resizeApi.php?id=1176733&size=128' style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'></div>");
+
+                                $("#"+imgs_ul_id).show();
+                                break;
+                            default:
+
+                        }
 
                     }
 
