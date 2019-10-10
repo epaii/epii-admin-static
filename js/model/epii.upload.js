@@ -209,9 +209,12 @@ define(["plupload", "jquery"], function (Plupload, $) {
 
                         }
 
-                        $("#"+imgs_ul_id).append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img' src='"+icon+"' style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'></div>");
+                        var imgs_ul_id_jquery = $("#"+imgs_ul_id);
+                        imgs_ul_id_jquery.css({"overflow":"auto"});
+                        imgs_ul_id_jquery.append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img' src='"+icon+"' style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'></div>");
 
-                        $("#"+imgs_ul_id).show();
+
+                        imgs_ul_id_jquery.show();
 
                     }
 
