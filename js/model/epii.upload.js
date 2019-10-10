@@ -163,7 +163,8 @@ define(["plupload", "jquery"], function (Plupload, $) {
                         img.show();
 
                     }else if (imgs_ul_id &&  $(button).data("multiple")) {
-                        $("#"+imgs_ul_id).append("<img src=\""+response.url+"\" style='padding:26px ;width:200px !important; border:0.5px solid #dcdcdc;margin: 24px 3px; "+img_style+"'>");
+                        $("#"+imgs_ul_id).append("<img src=\""+response.url+"\" style='padding:26px ;width:200px !important; border:0.5px solid #dcdcdc;margin: 24px 3px; "+img_style+"'><text onclick='delete(this)'><i class=\"fa fa-times\" aria-hidden=\"true\"></i></text>");
+
                         $("#"+imgs_ul_id).show();
 
                     }
@@ -184,6 +185,9 @@ define(["plupload", "jquery"], function (Plupload, $) {
                     if (onDomUploadSuccess && window[onDomUploadSuccess] && (typeof window[onDomUploadSuccess] == "function")) {
                         window[onDomUploadSuccess](up, response?response:null);
                     }
+                },
+                delete:function(e){
+                    console.log("2133333333333------------")
                 },
                 Error: function (up, err) {
                     var button = up.settings.button;
