@@ -186,9 +186,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
                         window[onDomUploadSuccess](up, response?response:null);
                     }
                 },
-                Delete:function(e){
-                    console.log("2133333333333------------")
-                },
+
                 Error: function (up, err) {
                     var button = up.settings.button;
                     $(button).prop("disabled", false).html($(button).data("bakup-html"));
@@ -202,7 +200,9 @@ define(["plupload", "jquery"], function (Plupload, $) {
                     }
                 }
             },
-
+            Delete:function(e){
+                console.log("2133333333333------------")
+            },
             button: that
         };
 
