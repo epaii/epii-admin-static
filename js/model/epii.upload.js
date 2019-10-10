@@ -89,7 +89,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
                     var name = files[0].name
                     var type = name.split('.')
                     console.log(type);
-                    return;
+
                     switch(type[1]){
                         case "zip":
                             //执行代码
