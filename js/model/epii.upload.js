@@ -84,8 +84,8 @@ define(["plupload", "jquery"], function (Plupload, $) {
                 },
 
                 FilesAdded: function (up, files) {
-                    console.log(files.e.name)
-                    onsole.log(files[e].name)
+
+                    console.log(files[e].name)
                     if(files.e){
 
                     }
