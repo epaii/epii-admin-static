@@ -12,7 +12,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
 
         var d_config = {
             maxsize: "2048kb",
-            mimetype: "jpg,gif,png,jpeg,pdf,zip,rar",
+            mimetype: "jpg,gif,png,jpeg,pdf,zip,rar,docx",
             url: (Args.pluginsData && Args.pluginsData.upload_url) ? Args.pluginsData.upload_url : ""
 
         };
@@ -100,6 +100,12 @@ define(["plupload", "jquery"], function (Plupload, $) {
                         case "pdf":
                             //执行代码
                             $("#"+imgs_ul_id).append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img' src='https://www.easyicon.net/api/resizeApi.php?id=1129287&size=128' style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'><img style='position: absolute;width: 28px;top:0px;right: 0px;' src='https://www.easyicon.net/api/resizeApi.php?id=1081640&size=128'></div>");
+
+                            $("#"+imgs_ul_id).show();
+                            break;
+                        case "docx":
+                            //执行代码
+                            $("#"+imgs_ul_id).append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img' src='https://www.easyicon.net/api/resizeApi.php?id=1129287&size=128' style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'><img style='position: absolute;width: 28px;top:0px;right: 0px;' src='https://www.easyicon.net/api/resizeApi.php?id=1176733&size=128'></div>");
 
                             $("#"+imgs_ul_id).show();
                             break;
