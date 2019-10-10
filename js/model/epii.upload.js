@@ -95,6 +95,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
                             var nums = value === '' ? 0 : value.split(/\,/).length;
                             var remains = maxcount - nums;
                             console.log(remains)
+                            console.log(value)
                             console.log(files.length)
 
                             if (files.length > remains) {
