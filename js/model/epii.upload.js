@@ -163,7 +163,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
                         img.show();
 
                     }else if (imgs_ul_id &&  $(button).data("multiple")) {
-                        $("#"+imgs_ul_id).append("<div class='img_bg' style='position: relative;float: left;'><img class='tu_img'  src=\""+response.url+"\" style='padding:26px ;width:200px !important; border:0.5px solid #dcdcdc;margin: 0px 3px; "+img_style+"'><img style='position: absolute;width: 28px;top:26px;right: 4px;' src='https://www.easyicon.net/api/resizeApi.php?id=1081640&size=128'></div>");
+                        $("#"+imgs_ul_id).append("<div class='img_bg' style='transition: opacity .3s;position: relative;float: left;'><img class='tu_img'  src=\""+response.url+"\" style='padding:26px ;width:200px !important; border:0.5px solid #dcdcdc;margin: 0px 3px; "+img_style+"'><img style='position: absolute;width: 28px;top:26px;right: 4px;' src='https://www.easyicon.net/api/resizeApi.php?id=1081640&size=128'></div>");
 
                         $("#"+imgs_ul_id).show();
 
