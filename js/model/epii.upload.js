@@ -94,12 +94,12 @@ define(["plupload", "jquery"], function (Plupload, $) {
                             var value = $.trim(inputObj.val());
                             var nums = value === '' ? 0 : value.split(/\,/).length;
                             var remains = maxcount - nums;
-                            if(remains === 0){
+                            if(remains == 1){
                                 remains+1
                             }
-                            console.log(remains)
-                            console.log(value)
-                            console.log(files.length)
+                            console.log(remains) //2  1
+                            console.log(value)  //  ''   rr
+                            console.log(files.length)   //1   1
 
                             if (files.length > remains) {
                                 for (var i = 0; i < files.length; i++) {
