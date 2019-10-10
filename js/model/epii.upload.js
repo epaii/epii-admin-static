@@ -86,12 +86,10 @@ define(["plupload", "jquery"], function (Plupload, $) {
                 FilesAdded: function (up, files) {
 
                     var name = files[0].name
-                    console.log(name.split('.'))
-                    return;
-                    if(files.e){
-
+                    var type = name.split('.')
+                    if(type[1] == "zip"){
+                     alert('我是压缩包')
                     }
-
                     var button = up.settings.button;
                     $(button).data("bakup-html", $(button).html());
                     var maxcount = $(button).data("maxcount");
