@@ -82,12 +82,17 @@ define(["plupload", "jquery"], function (Plupload, $) {
                 PostInit: function () {
                     //alert("PostInit");
                 },
+
                 FilesAdded: function (up, files) {
+                    console.log(files)
+                    console.log(up)
+
                     var button = up.settings.button;
                     $(button).data("bakup-html", $(button).html());
                     var maxcount = $(button).data("maxcount");
                     var input_id = $(button).data("input-id") ? $(button).data("input-id") : "";
                     maxcount = typeof maxcount !== "undefined" ? maxcount : 0;
+
                     if (maxcount > 0 && input_id) {
                         var inputObj = $("#" + input_id);
                         if (inputObj) {
