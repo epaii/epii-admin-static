@@ -80,8 +80,13 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
         }
 
     };
-    out.do.refresh = function () {
-        this.table.bootstrapTable("refresh");
+    out.do.refresh = function (query) {
+        if (query)
+            this.table.bootstrapTable("refresh", {
+                query: query
+            });
+        else
+            this.table.bootstrapTable("refresh");
     };
     out.do.url = function (selectids) {
         var name = "selectids";
