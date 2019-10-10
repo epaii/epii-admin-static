@@ -177,7 +177,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
 
 
                 },
-                delete:function(e){
+                delete:function(){
                     console.log("2133333333333------------")
                 },
                 UploadComplete: function (up, files) {
