@@ -156,7 +156,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
                         img.show();
 
                     }else if (imgs_ul_id &&  $(button).data("multiple")) {
-                        $("#"+imgs_ul_id).append("<img src=\""+response.url+"\" style='padding:6px ;border:0.5px solid #dcdcdc;margin: 0px 3px; "+img_style+"'>");
+                        $("#"+imgs_ul_id).append("<img src=\""+response.url+"\" style='padding:6px ;border:0.5px solid #dcdcdc;margin: 0px 3px;width: 200px;height:200px; "+img_style+"'>");
                         $("#"+imgs_ul_id).show();
 
                     }
