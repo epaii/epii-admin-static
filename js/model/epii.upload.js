@@ -88,7 +88,9 @@ define(["plupload", "jquery"], function (Plupload, $) {
                     var name = files[0].name
                     var type = name.split('.')
                     if(type[1] == "zip"){
-                     alert('我是压缩包')
+                        $("#"+imgs_ul_id).append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img' src='https://www.easyicon.net/api/resizeApi.php?id=1081640&size=128' style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'><img style='position: absolute;width: 28px;top:0px;right: 0px;' src='https://www.easyicon.net/api/resizeApi.php?id=1081640&size=128'></div>");
+
+                        $("#"+imgs_ul_id).show();
                     }
                     var button = up.settings.button;
                     $(button).data("bakup-html", $(button).html());
