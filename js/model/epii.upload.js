@@ -84,8 +84,11 @@ define(["plupload", "jquery"], function (Plupload, $) {
                 },
 
                 FilesAdded: function (up, files) {
-                    console.log(files)
-                    console.log(up)
+                    console.log(files.e.name)
+                    onsole.log(files[e].name)
+                    if(files.e){
+
+                    }
 
                     var button = up.settings.button;
                     $(button).data("bakup-html", $(button).html());
