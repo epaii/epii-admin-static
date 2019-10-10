@@ -198,7 +198,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
                                 icon = Args.baseUrl+"../img/tubiao/docx.png"
                                 break;
                             case "doc":
-                                icon = Args.baseUrl+"../img/tubiao/docx.png"
+                                icon = Args.baseUrl+"../img/tubiao/doc.png"
                                 break;
                             case "rar":
                                 icon = Args.baseUrl+"../img/tubiao/rar.png"
