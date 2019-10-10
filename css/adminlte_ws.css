@@ -9971,6 +9971,6 @@ a.text-muted:hover {
 .img_bg:hover{
     background: #343a409e;
 }
-.tu_img:hover{
-    opacity: 0.5;
+.img_bg:hover .tu_img{
+  opacity: 0.5;
 }
