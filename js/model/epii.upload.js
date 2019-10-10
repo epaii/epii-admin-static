@@ -131,7 +131,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
 
 
                     var response = JSON.parse(info.response);
-
+                   console.log(response)
                     if (response.code-0==0)
                     {
                         alert(response.msg);
