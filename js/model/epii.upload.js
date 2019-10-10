@@ -1,5 +1,6 @@
 define(["plupload", "jquery"], function (Plupload, $) {
 
+
     var out = [];
 
     // out.showFile=function(obj,file)
@@ -174,35 +175,40 @@ define(["plupload", "jquery"], function (Plupload, $) {
                         img.show();
 
                     }else if (imgs_ul_id &&  $(button).data("multiple")) {
-                        $("#"+imgs_ul_id).append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img'  src=\""+response.url+"\" style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'></div>");
 
-                        $("#"+imgs_ul_id).show();
-                        var name = files[0].name
+                        var name = response.url
                         var type = name.split('.')
                         console.log(type);
 
+                        var icon = "";
                         switch(type[1]){
+                            case "png":
+                            case "jpeg":
+                            case "gif":
+                            case "jpg":
+                                icon = response.url;
+                                break;
                             case "zip":
-                                //执行代码
-                                $("#"+imgs_ul_id).append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img' src='https://www.easyicon.net/api/resizeApi.php?id=1169012&size=128' style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'></div>");
-
-                                $("#"+imgs_ul_id).show();
+                                icon = Args.baseUrl+"../img/tubiao/zip.png"
                                 break;
                             case "pdf":
-                                //执行代码
-                                $("#"+imgs_ul_id).append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img' src='https://www.easyicon.net/api/resizeApi.php?id=1205624&size=128' style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'></div>");
-
-                                $("#"+imgs_ul_id).show();
+                                icon = Args.baseUrl+"../img/tubiao/pdf.png"
                                 break;
                             case "docx":
-                                //执行代码
-                                $("#"+imgs_ul_id).append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img' src='https://www.easyicon.net/api/resizeApi.php?id=1176733&size=128' style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'></div>");
-
-                                $("#"+imgs_ul_id).show();
+                                icon = Args.baseUrl+"../img/tubiao/docx.png"
                                 break;
+                            case "rar":
+                                icon = Args.baseUrl+"../img/tubiao/rar.png"
+                                break;
+
                             default:
+                                break;
 
                         }
+
+                        $("#"+imgs_ul_id).append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img' src='"+icon+"' style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'></div>");
+
+                        $("#"+imgs_ul_id).show();
 
                     }
 
