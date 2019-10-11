@@ -52,36 +52,54 @@ define(["plupload", "jquery"], function (Plupload, $) {
 
         };
 
+        var that_jq = $(that);
 
-        if ($(that).attr("inited")) {
+        if (that_jq.attr("inited")) {
             return true;
         }
-        $(that).attr("inited", true);
+        that_jq.attr("inited", true);
 
-        var id = $(that).prop("id");
-        if (!id) {
-            alert("All upload dom must has a id attr");
-            return;
+        var browse_jq = null;
+        if (that.browse_dom) {
+            browse_jq = that.browse_dom;
+
         }
-        var url = $(that).data("url");
+        if (!browse_jq) {
+            var id = that_jq.prop("id");
+            if (!id) {
+                alert("All upload dom must has a id attr");
+                return;
+            }
+            browse_jq = document.getElementById(id);
+        }
+
+        var url = that_jq.data("url");
         url = typeof url !== "undefined" ? url : d_config.url;
         if (!url) {
             alert("Must set a data-url attr");
             return;
         }
-        var maxsize = $(that).data("maxsize");
-        var mimetype = $(that).data("mimetype");
-        var multipart = $(that).data("multipart");
-        var multiple = $(that).data("multiple");
+        var maxsize = that_jq.data("maxsize");
+        var mimetype = that_jq.data("mimetype");
+        var multipart = that_jq.data("multipart");
+        var multiple = that_jq.data("multiple");
 
 
-        var input_id = $(that).data("input-id") ? $(that).data("input-id") : "";
+        var input_id = that_jq.data("input-id") ? that_jq.data("input-id") : "";
 
-        var img_id = $(that).data("img-id") ? $(that).data("img-id") : "";
+        var img_id = that_jq.data("img-id") ? that_jq.data("img-id") : "";
 
-        var imgs_ul_id = $(that).data("preview-id") ? $(that).data("preview-id") : "";
+        var imgs_ul_id = that_jq.data("preview-id") ? that_jq.data("preview-id") : "";
         if (!imgs_ul_id)
-            imgs_ul_id = $(that).data("imgs-id") ? $(that).data("imgs-id") : "";
+            imgs_ul_id = that_jq.data("imgs-id") ? that_jq.data("imgs-id") : "";
+
+        var imgs_ul_id_jquery = null;
+
+        if (imgs_ul_id) {
+            imgs_ul_id_jquery = $("#" + imgs_ul_id)
+        } else if (that.preview_dom) {
+            imgs_ul_id_jquery = $(that.preview_dom);
+        }
         var img_style = $(that).data("preview-style") ? $(that).data("preview-style") : "";
         if (!img_style)
             img_style = $(that).data("img-style") ? $(that).data("img-style") : "";
@@ -107,8 +125,8 @@ define(["plupload", "jquery"], function (Plupload, $) {
         var option = {
             runtimes: 'html5,flash,silverlight,html4',
             multi_selection: multiple, //是否允许多选批量上传
-            browse_button: id, // 浏览按钮的ID
-            container: $(this).parent().get(0), //取按钮的上级元素
+            browse_button: browse_jq, // 浏览按钮的ID
+            //container: $(browse_jq).parent().get(0), //取按钮的上级元素
             flash_swf_url: Args.pluginsUrl + '/plupload/js/Moxie.swf',
             silverlight_xap_url: Args.pluginsUrl + '/plupload/js/Moxie.xap',
             filters: {
@@ -123,11 +141,11 @@ define(["plupload", "jquery"], function (Plupload, $) {
                 },
 
                 FilesAdded: function (up, files) {
-                    console.log(files);
 
+                    var browse_button = up.settings.browse_button;
 
+                    $(browse_button).data("bakup-html", $(browse_button).html());
                     var button = up.settings.button;
-                    $(button).data("bakup-html", $(button).html());
                     var maxcount = $(button).data("maxcount");
                     var input_id = $(button).data("input-id") ? $(button).data("input-id") : "";
                     maxcount = typeof maxcount !== "undefined" ? maxcount : 0;
@@ -157,12 +175,17 @@ define(["plupload", "jquery"], function (Plupload, $) {
                     }, 1);
                 },
                 BeforeUpload: function (up, file) {
-                    var button = up.settings.button;
+                    var button = up.settings.browse_button;
                     $(button).prop("disabled", true).html("<i class='fa fa-upload'></i> 即将上传");
                 },
                 UploadProgress: function (up, file) {
+
+
+                    var browse_button = up.settings.browse_button;
+                    $(browse_button).prop("disabled", true).html("<i class='fa fa-upload'></i> 上传中" + file.percent + "%");
+
+
                     var button = up.settings.button;
-                    $(button).prop("disabled", true).html("<i class='fa fa-upload'></i> 上传中" + file.percent + "%");
                     // Upload.events.onUploadProgress(up, file);
                     var onDomUploadSuccess = $(button).data("upload-progress");
                     if (onDomUploadSuccess && window[onDomUploadSuccess] && (typeof window[onDomUploadSuccess] == "function")) {
@@ -170,10 +193,12 @@ define(["plupload", "jquery"], function (Plupload, $) {
                     }
                 },
                 FileUploaded: function (up, file, info) {
+                    var browse_button = up.settings.browse_button;
+                    $(browse_button).prop("disabled", false).html($(browse_button).data("bakup-html"));
+
 
 
                     var button = up.settings.button;
-                    //还原按钮文字及状态
 
 
                     var response = JSON.parse(info.response);
@@ -200,14 +225,12 @@ define(["plupload", "jquery"], function (Plupload, $) {
                             img.attr("style", img_style);
                         img.show();
 
-                    } else if (imgs_ul_id && $(button).data("multiple")) {
+                    } else if (imgs_ul_id_jquery && $(button).data("multiple")) {
 
                         var name = response.url;
                         var icon = out.getFileIcon(name);
 
 
-                        var del = Args.baseUrl + "../img/tubiao/delete.png";
-                        var imgs_ul_id_jquery = $("#" + imgs_ul_id);
                         imgs_ul_id_jquery.css({"overflow": "auto"});
                         var file_div = $("<div class='epii-upload-files-div' ><img class='epii-upload-file-icon' layer-index='" + imgs_ul_id_jquery.find(".epii-upload-files-div").length + "' src='" + icon + "' style='" + img_style + "'></div>");
 
@@ -229,7 +252,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
 
                             })(inputObj, response.path)
                         );
-                          close.hide();
+                        close.hide();
                         file_div.append(close);
 
                         file_div.mouseout(function () {
@@ -273,9 +296,12 @@ define(["plupload", "jquery"], function (Plupload, $) {
 
                 },
                 UploadComplete: function (up, files) {
-                    // alert("UploadComplete")
+                    var browse_button = up.settings.browse_button;
+                    $(browse_button).prop("disabled", false).html($(browse_button).data("bakup-html"));
+
+
                     var button = up.settings.button;
-                    $(button).prop("disabled", false).html($(button).data("bakup-html"));
+
                     var onDomUploadSuccess = $(button).data("upload-complete");
                     if (onDomUploadSuccess && window[onDomUploadSuccess] && (typeof window[onDomUploadSuccess] == "function")) {
                         window[onDomUploadSuccess](up, response ? response : null);
@@ -283,10 +309,10 @@ define(["plupload", "jquery"], function (Plupload, $) {
                 },
 
                 Error: function (up, err) {
+                    var browse_button = up.settings.browse_button;
+                    $(browse_button).prop("disabled", false).html($(browse_button).data("bakup-html"));
+
                     var button = up.settings.button;
-                    $(button).prop("disabled", false).html($(button).data("bakup-html"));
-
-
                     var onDomUploadSuccess = $(button).data("upload-error");
                     if (onDomUploadSuccess && window[onDomUploadSuccess] && (typeof window[onDomUploadSuccess] == "function")) {
                         window[onDomUploadSuccess](up, err);
