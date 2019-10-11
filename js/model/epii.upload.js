@@ -97,6 +97,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
 
         if (imgs_ul_id) {
             imgs_ul_id_jquery = $("#" + imgs_ul_id)
+            imgs_ul_id_jquery.css({"overflow": "auto"});
         } else if (that.preview_dom) {
             imgs_ul_id_jquery = $(that.preview_dom);
         }
@@ -231,7 +232,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
                         var icon = out.getFileIcon(name);
 
 
-                        imgs_ul_id_jquery.css({"overflow": "auto"});
+
                         var file_div = $("<div class='epii-upload-files-div' ><img class='epii-upload-file-icon' layer-index='" + imgs_ul_id_jquery.find(".epii-upload-files-div").length + "' src='" + icon + "' style='" + img_style + "'></div>");
 
 

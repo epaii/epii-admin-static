@@ -6,9 +6,10 @@
 }
 
 .epii-upload-file-icon {
-    padding: 26px;
+    padding: 5px;
     border-radius: 10px;
     width: 200px ;
+    height: 240px;
     border: 0.5px solid #dcdcdc;
 }
 
@@ -34,11 +35,30 @@
     opacity: 0.5;
 }
 .epii-upload-preview{
-
+    overflow: auto;
+    border: 1px solid #8c939d;
+    margin-top: 10px;
+    padding: 0px 25px;
+    width: 1156px;
+    border-radius: 10px;
 }
 .epii-upload-preview-btn{
+    border: 1px dashed #8c939d;
+    float: left;
+    width: 200px;
+    height: 240px;
+    margin: 30px 10px;
+    border-radius: 10px;
+    text-align: center;
 
 }
 .epii-upload-preview-files{
+
+}
+.epii-upload-preview-add{
+    color: #8c939d;
+    font-size: 44px;
+    margin-top: 80px;
+    text-align: center;
 
 }
