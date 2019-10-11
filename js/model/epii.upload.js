@@ -1,6 +1,13 @@
 define(["plupload", "jquery"], function (Plupload, $) {
 
+
     var out = [];
+
+    // out.showFile=function(obj,file)
+    // {
+    //
+    // };
+
     out.init = function (buttons) {
 
         buttons.each(function () {
@@ -12,7 +19,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
 
         var d_config = {
             maxsize: "2048kb",
-            mimetype: "jpg,gif,png,jpeg",
+            mimetype: "jpg,gif,png,jpeg,pdf,zip,rar,docx",
             url: (Args.pluginsData && Args.pluginsData.upload_url) ? Args.pluginsData.upload_url : ""
 
         };
@@ -82,24 +89,36 @@ define(["plupload", "jquery"], function (Plupload, $) {
                 PostInit: function () {
                     //alert("PostInit");
                 },
+
                 FilesAdded: function (up, files) {
+                    console.log(files);
+
+
                     var button = up.settings.button;
                     $(button).data("bakup-html", $(button).html());
                     var maxcount = $(button).data("maxcount");
                     var input_id = $(button).data("input-id") ? $(button).data("input-id") : "";
                     maxcount = typeof maxcount !== "undefined" ? maxcount : 0;
+
                     if (maxcount > 0 && input_id) {
                         var inputObj = $("#" + input_id);
-                        if (inputObj) {
-                            var value = $.trim(inputObj.val());
-                            var nums = value === '' ? 0 : value.split(/\,/).length;
-                            var remains = maxcount - nums;
-                            if (files.length > remains) {
-                                for (var i = 0; i < files.length; i++) {
-                                    up.removeFile(files[i]);
+                        if (maxcount > 0 && input_id) {
+                            var inputObj = $("#" + input_id);
+                            if (inputObj) {
+                                var value = $.trim(inputObj.val());
+                                var nums = value === '' ? 0 : value.split(/\,/).length;
+                                var remains = maxcount - nums;
+                                console.log(remains)
+                                console.log(value)
+                                console.log(files.length)
+
+                                if (files.length > remains) {
+                                    for (var i = 0; i < files.length; i++) {
+                                        up.removeFile(files[i]);
+                                    }
+                                    alert('You can upload up to ' + remains + ' file');
+                                    return false;
                                 }
-                                alert('You can upload up to ' + remains + ' file');
-                                return false;
                             }
                         }
                     }
@@ -131,7 +150,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
 
 
                     var response = JSON.parse(info.response);
-
+                    console.log(response)
                     if (response.code-0==0)
                     {
                         alert(response.msg);
@@ -152,12 +171,51 @@ define(["plupload", "jquery"], function (Plupload, $) {
                         var img = $("#" + img_id);
                         img.attr("src", response.url);
                         if (img_style)
-                        img.attr("style",img_style);
+                            img.attr("style",img_style);
                         img.show();
 
                     }else if (imgs_ul_id &&  $(button).data("multiple")) {
-                        $("#"+imgs_ul_id).append("<img src=\""+response.url+"\" style='padding:6px ;border:0.5px solid #dcdcdc;margin: 0px 3px; "+img_style+"'>");
-                        $("#"+imgs_ul_id).show();
+
+                        var name = response.url
+                        var type = name.split('.')
+                        console.log(type);
+
+                        var icon = "";
+                        switch(type[1]){
+                            case "png":
+                            case "jpeg":
+                            case "gif":
+                            case "jpg":
+                                icon = response.url;
+                                break;
+                            case "zip":
+                                icon = Args.baseUrl+"../img/tubiao/zip.png"
+                                break;
+                            case "pdf":
+                                icon = Args.baseUrl+"../img/tubiao/pdf.png"
+                                break;
+                            case "docx":
+                                icon = Args.baseUrl+"../img/tubiao/docx.png"
+                                break;
+                            case "doc":
+                                icon = Args.baseUrl+"../img/tubiao/doc.png"
+                                break;
+                            case "rar":
+                                icon = Args.baseUrl+"../img/tubiao/rar.png"
+                                break;
+
+                            default:
+                                icon = Args.baseUrl+"../img/tubiao/qita.png"
+                                break;
+
+                        }
+
+                        var imgs_ul_id_jquery = $("#"+imgs_ul_id);
+                        imgs_ul_id_jquery.css({"overflow":"auto"});
+                        imgs_ul_id_jquery.append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img' src='"+icon+"' style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'></div>");
+
+
+                        imgs_ul_id_jquery.show();
 
                     }
 
@@ -178,6 +236,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
                         window[onDomUploadSuccess](up, response?response:null);
                     }
                 },
+
                 Error: function (up, err) {
                     var button = up.settings.button;
                     $(button).prop("disabled", false).html($(button).data("bakup-html"));

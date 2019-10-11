@@ -9968,3 +9968,10 @@ a.text-muted:hover {
 
 
 /*# sourceMappingURL=adminlte_ws.css.map */
+.img_bg:hover{
+    background: #343a409e;
+  border-radius: 10px;
+}
+.img_bg:hover .tu_img{
+  opacity: 0.5;
+}
