@@ -181,6 +181,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
                         console.log(type);
 
                         var icon = "";
+                        var del = Args.baseUrl+"../img/tubiao/delete.png"
                         switch(type[1]){
                             case "png":
                             case "jpeg":
@@ -212,10 +213,11 @@ define(["plupload", "jquery"], function (Plupload, $) {
 
                         var imgs_ul_id_jquery = $("#"+imgs_ul_id);
                         imgs_ul_id_jquery.css({"overflow":"auto"});
-                        imgs_ul_id_jquery.append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img' src='"+icon+"' style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'></div>");
+                        imgs_ul_id_jquery.append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img' src='"+icon+"' style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'><img style='position: absolute;width: 28px;top:0px;right: 0px;'  src='"+del+"' onclick='del()'></div>");
 
 
                         imgs_ul_id_jquery.show();
+
 
                     }
 
