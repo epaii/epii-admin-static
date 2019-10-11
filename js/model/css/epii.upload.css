@@ -1,0 +1,35 @@
+.epii-upload-files-div {
+    margin: 30px 10px;
+    transition: all 0.6s;
+    position: relative;
+    float: left;
+}
+
+.epii-upload-file-icon {
+    padding: 26px;
+    border-radius: 10px;
+    width: 200px !important;
+    border: 0.5px solid #dcdcdc;
+}
+
+.epii-upload-file-close {
+
+    background: url(../../plugins/layer/theme/default/icon.png) no-repeat;
+    position: absolute;
+    right: -18px;
+    top: -18px;
+    width: 30px;
+    height: 30px;
+    margin-left: 0;
+    background-position: -149px -31px;
+    background-position-x: -149px;
+    background-position-y: -31px;
+}
+
+.epii-upload-files-div:hover{
+    background: #343a409e;
+    border-radius: 10px;
+}
+.epii-upload-files-div:hover .epii-upload-file-icon{
+    opacity: 0.5;
+}

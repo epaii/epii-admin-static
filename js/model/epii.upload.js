@@ -8,6 +8,34 @@ define(["plupload", "jquery"], function (Plupload, $) {
     //
     // };
 
+
+    out.getFileIcon = function (file) {
+        var type = file.split('.');
+        var ext = type[type.length - 1];
+        var icon = "";
+        switch (ext) {
+            case "png":
+            case "jpeg":
+            case "gif":
+            case "jpg":
+                icon = file;
+                break;
+            case "zip":
+            case "pdf":
+            case "docx":
+            case "doc":
+            case "rar":
+                icon = Args.baseUrl + "../img/tubiao/" + ext + ".png"
+                break;
+            default:
+                icon = Args.baseUrl + "../img/tubiao/qita.png"
+                break;
+
+        }
+        return icon;
+    };
+
+
     out.init = function (buttons) {
 
         buttons.each(function () {
@@ -51,7 +79,9 @@ define(["plupload", "jquery"], function (Plupload, $) {
 
         var img_id = $(that).data("img-id") ? $(that).data("img-id") : "";
 
-        var imgs_ul_id = $(that).data("imgs-id") ? $(that).data("imgs-id") : "";
+        var imgs_ul_id = $(that).data("preview-id") ? $(that).data("preview-id") : "";
+        if (!imgs_ul_id)
+            imgs_ul_id = $(that).data("imgs-id") ? $(that).data("imgs-id") : "";
         var img_style = $(that).data("img-style") ? $(that).data("img-style") : "";
 
 
@@ -108,10 +138,6 @@ define(["plupload", "jquery"], function (Plupload, $) {
                                 var value = $.trim(inputObj.val());
                                 var nums = value === '' ? 0 : value.split(/\,/).length;
                                 var remains = maxcount - nums;
-                                console.log(remains)
-                                console.log(value)
-                                console.log(files.length)
-
                                 if (files.length > remains) {
                                     for (var i = 0; i < files.length; i++) {
                                         up.removeFile(files[i]);
@@ -144,22 +170,20 @@ define(["plupload", "jquery"], function (Plupload, $) {
                 FileUploaded: function (up, file, info) {
 
 
-
                     var button = up.settings.button;
                     //还原按钮文字及状态
 
 
                     var response = JSON.parse(info.response);
-                    console.log(response)
-                    if (response.code-0==0)
-                    {
+
+                    if (response.code - 0 == 0) {
                         alert(response.msg);
                         return;
                     }
-
+                    var inputObj;
                     if (input_id) {
                         var urlArr = [];
-                        var inputObj = $("#" + input_id);
+                        inputObj = $("#" + input_id);
                         if ($(button).data("multiple") && inputObj.val() !== "") {
                             urlArr.push(inputObj.val());
                         }
@@ -171,49 +195,65 @@ define(["plupload", "jquery"], function (Plupload, $) {
                         var img = $("#" + img_id);
                         img.attr("src", response.url);
                         if (img_style)
-                            img.attr("style",img_style);
+                            img.attr("style", img_style);
                         img.show();
 
-                    }else if (imgs_ul_id &&  $(button).data("multiple")) {
+                    } else if (imgs_ul_id && $(button).data("multiple")) {
 
-                        var name = response.url
-                        var type = name.split('.')
-                        console.log(type);
+                        var name = response.url;
+                        var icon = out.getFileIcon(name);
 
-                        var icon = "";
-                        var del = Args.baseUrl+"../img/tubiao/delete.png"
-                        switch(type[1]){
-                            case "png":
-                            case "jpeg":
-                            case "gif":
-                            case "jpg":
-                                icon = response.url;
-                                break;
-                            case "zip":
-                                icon = Args.baseUrl+"../img/tubiao/zip.png"
-                                break;
-                            case "pdf":
-                                icon = Args.baseUrl+"../img/tubiao/pdf.png"
-                                break;
-                            case "docx":
-                                icon = Args.baseUrl+"../img/tubiao/docx.png"
-                                break;
-                            case "doc":
-                                icon = Args.baseUrl+"../img/tubiao/doc.png"
-                                break;
-                            case "rar":
-                                icon = Args.baseUrl+"../img/tubiao/rar.png"
-                                break;
 
-                            default:
-                                icon = Args.baseUrl+"../img/tubiao/qita.png"
-                                break;
+                        var del = Args.baseUrl + "../img/tubiao/delete.png";
+                        var imgs_ul_id_jquery = $("#" + imgs_ul_id);
+                        imgs_ul_id_jquery.css({"overflow": "auto"});
+                        var file_div = $("<div class='epii-upload-files-div' ><img class='epii-upload-file-icon' layer-index='"+imgs_ul_id_jquery.find(".epii-upload-files-div").length+"' src='" + icon + "' style='" + img_style + "'></div>");
 
-                        }
 
-                        var imgs_ul_id_jquery = $("#"+imgs_ul_id);
-                        imgs_ul_id_jquery.css({"overflow":"auto"});
-                        imgs_ul_id_jquery.append("<div class='img_bg' style='margin: 30px 10px;transition: all 0.6s;margin-top: 30px;position: relative;float: left;'><img class='tu_img' src='"+icon+"' style='padding:26px ;border-radius: 10px;width:200px !important; border:0.5px solid #dcdcdc;"+img_style+"'><img style='position: absolute;width: 28px;top:0px;right: 0px;'  src='"+del+"' onclick='del()'></div>");
+                        //var close = $("<img  class='epii-upload-file-close'  src='" + del + "'  >");
+                        var close = $('<a  class="epii-upload-file-close" href="javascript:;"></a>');
+                        close.click(
+                            (function (input, val) {
+                                return function () {
+
+                                    if (input) {
+                                        var val_real = input.val() + ",";
+                                        val_real = val_real.replace(val + ",", "").replace(/,$/g, '');
+                                        input.val(val_real).trigger("change");
+                                    }
+                                    $(this).parent().remove();
+                                };
+
+                            })(inputObj, response.url)
+                        );
+                       // close.hide();
+                        file_div.append(close);
+
+                        // file_div.mouseout(function () {
+                        //     if (this.getElementsByClassName("epii-upload-file-close").length > 0) {
+                        //         $(this).find(".epii-upload-file-close").hide();
+                        //     }
+                        // });
+                        // file_div.mouseover(function () {
+                        //     if (this.getElementsByClassName("epii-upload-file-close").length > 0) {
+                        //         $(this).find(".epii-upload-file-close").show();
+                        //     }
+                        // });
+
+                        file_div.find(".epii-upload-file-icon").click(function () {
+
+                            if (this.getElementsByClassName("epii-upload-file-close").length > 0) {
+                                $(this).find(".epii-upload-file-close").remove();
+                            }
+                            //  imgs_ul_id_jquery.find(".epii-upload-file-close").hide();
+                            window.top.layer.photos({
+                                photos: imgs_ul_id_jquery,
+                                closeBtn: 1,
+                                anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+                            });
+
+                        });
+                        imgs_ul_id_jquery.append(file_div);
 
 
                         imgs_ul_id_jquery.show();
@@ -235,7 +275,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
                     $(button).prop("disabled", false).html($(button).data("bakup-html"));
                     var onDomUploadSuccess = $(button).data("upload-complete");
                     if (onDomUploadSuccess && window[onDomUploadSuccess] && (typeof window[onDomUploadSuccess] == "function")) {
-                        window[onDomUploadSuccess](up, response?response:null);
+                        window[onDomUploadSuccess](up, response ? response : null);
                     }
                 },
 

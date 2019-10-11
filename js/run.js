@@ -54,7 +54,7 @@ require.config({
         "city-picker-core": [Args.pluginsUrl + 'city-picker/dist/js/city-picker.data', "css!" + Args.pluginsUrl + "city-picker/dist/css/city-picker.css"],
         'bootstrap-select': ["jquery", "bootstrap", 'css!' + Args.pluginsUrl + 'bootstrap-select/dist/css/bootstrap-select.min.css'],
         'bootstrap-select-lang': ['bootstrap-select'],
-        "epii-upload":["jquery","plupload"]
+        "epii-upload":["jquery","plupload","css!model/css/epii.upload.css"]
 
     },
     map: {

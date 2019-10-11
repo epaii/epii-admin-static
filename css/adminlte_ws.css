@@ -9966,12 +9966,3 @@ a.text-muted:hover {
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22); }
 
 
-
-/*# sourceMappingURL=adminlte_ws.css.map */
-.img_bg:hover{
-    background: #343a409e;
-  border-radius: 10px;
-}
-.img_bg:hover .tu_img{
-  opacity: 0.5;
-}
