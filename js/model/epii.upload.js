@@ -205,6 +205,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
                                 break;
 
                             default:
+                                icon = Args.baseUrl+"../img/tubiao/qita.png"
                                 break;
 
                         }
