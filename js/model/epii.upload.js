@@ -152,7 +152,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
                     maxcount = typeof maxcount !== "undefined" ? maxcount : 0;
 
                     if (maxcount > 0 && input_id) {
-                        var inputObj = $("#" + input_id);
+
                         if (maxcount > 0 && input_id) {
                             var inputObj = $("#" + input_id);
                             if (inputObj) {
@@ -198,101 +198,111 @@ define(["plupload", "jquery"], function (Plupload, $) {
                     $(browse_button).prop("disabled", false).html($(browse_button).data("bakup-html"));
 
 
-
                     var button = up.settings.button;
 
 
-                    var response = JSON.parse(info.response);
+                    var response = null;
+                    try {
+                        response = JSON.parse(info.response);
+                    } catch (e) {
 
-                    if (response.code - 0 == 0) {
-                        alert(response.msg);
-                        return;
                     }
-                    var inputObj;
-                    if (input_id) {
-                        var urlArr = [];
-                        inputObj = $("#" + input_id);
-                        if ($(button).data("multiple") && inputObj.val() !== "") {
-                            urlArr.push(inputObj.val());
+                    if (response) {
+                        if (response.code - 0 == 0) {
+                            alert(response.msg);
+                            return;
                         }
-                        urlArr.push(response.path);
-                        inputObj.val(urlArr.join(",")).trigger("change");
-                    }
 
-                    if (img_id && !$(button).data("multiple")) {
-                        var img = $("#" + img_id);
-                        img.attr("src", response.url);
-                        if (img_style)
-                            img.attr("style", img_style);
-                        img.show();
-
-                    } else if (imgs_ul_id_jquery && $(button).data("multiple")) {
-
-                        var name = response.url;
-                        var icon = out.getFileIcon(name);
-
-
-
-                        var file_div = $("<div class='epii-upload-files-div' ><img class='epii-upload-file-icon' layer-index='" + imgs_ul_id_jquery.find(".epii-upload-files-div").length + "' src='" + icon + "' style='" + img_style + "'></div>");
-
-
-                        //var close = $("<img  class='epii-upload-file-close'  src='" + del + "'  >");
-                        var close = $('<a  class="epii-upload-file-close" href="javascript:;"></a>');
-                        close.click(
-                            (function (input, val) {
-                                return function () {
-
-                                    if (input) {
-                                        var val_real = input.val() + ",";
-                                        val_real = val_real.replace(val + ",", "").replace(/,$/g, '');
-
-                                        input.val(val_real).trigger("change");
-                                    }
-                                    $(this).parent().remove();
-                                };
-
-                            })(inputObj, response.path)
-                        );
-                        close.hide();
-                        file_div.append(close);
-
-                        file_div.mouseout(function () {
-                            if (this.getElementsByClassName("epii-upload-file-close").length > 0) {
-                                $(this).find(".epii-upload-file-close").hide();
+                        var inputObj;
+                        if (input_id) {
+                            var urlArr = [];
+                            inputObj = $("#" + input_id);
+                            if ($(button).data("multiple") && inputObj.val() !== "") {
+                                urlArr.push(inputObj.val());
                             }
-                        });
-                        file_div.mouseover(function () {
-                            if (this.getElementsByClassName("epii-upload-file-close").length > 0) {
-                                $(this).find(".epii-upload-file-close").show();
-                            }
-                        });
+                            urlArr.push(response.path);
+                            inputObj.val(urlArr.join(",")).trigger("change");
+                        }
 
-                        file_div.find(".epii-upload-file-icon").click(function () {
+                        if (img_id && !$(button).data("multiple")) {
+                            var img = $("#" + img_id);
+                            img.attr("src", response.url);
+                            if (img_style)
+                                img.attr("style", img_style);
+                            img.show();
 
-                            if (this.getElementsByClassName("epii-upload-file-close").length > 0) {
-                                $(this).find(".epii-upload-file-close").remove();
-                            }
-                            //  imgs_ul_id_jquery.find(".epii-upload-file-close").hide();
-                            window.top.layer.photos({
-                                photos: imgs_ul_id_jquery,
-                                closeBtn: 1,
-                                anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+                        } else if (imgs_ul_id_jquery && $(button).data("multiple")) {
+
+                            var name = response.url;
+                            var icon = out.getFileIcon(name);
+
+
+                            var file_div = $("<div class='epii-upload-files-div' ><img class='epii-upload-file-icon' layer-index='" + imgs_ul_id_jquery.find(".epii-upload-files-div").length + "' src='" + icon + "' style='" + img_style + "'></div>");
+
+
+                            //var close = $("<img  class='epii-upload-file-close'  src='" + del + "'  >");
+                            var close = $('<a  class="epii-upload-file-close" href="javascript:;"></a>');
+                            close.click(
+                                (function (input, val) {
+                                    return function () {
+
+                                        if (input) {
+                                            var val_real = input.val() + ",";
+                                            val_real = val_real.replace(val + ",", "").replace(/,$/g, '');
+
+                                            input.val(val_real).trigger("change");
+                                        }
+                                        $(this).parent().remove();
+                                    };
+
+                                })(inputObj, response.path)
+                            );
+                            close.hide();
+                            file_div.append(close);
+
+                            file_div.mouseout(function () {
+                                if (this.getElementsByClassName("epii-upload-file-close").length > 0) {
+                                    $(this).find(".epii-upload-file-close").hide();
+                                }
+                            });
+                            file_div.mouseover(function () {
+                                if (this.getElementsByClassName("epii-upload-file-close").length > 0) {
+                                    $(this).find(".epii-upload-file-close").show();
+                                }
                             });
 
-                        });
-                        imgs_ul_id_jquery.append(file_div);
-                        imgs_ul_id_jquery.show();
+                            file_div.find(".epii-upload-file-icon").click(function () {
+
+                                if (this.getElementsByClassName("epii-upload-file-close").length > 0) {
+                                    $(this).find(".epii-upload-file-close").remove();
+                                }
+                                //  imgs_ul_id_jquery.find(".epii-upload-file-close").hide();
+                                window.top.layer.photos({
+                                    photos: imgs_ul_id_jquery,
+                                    closeBtn: 1,
+                                    anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+                                });
+
+                            });
+                            imgs_ul_id_jquery.append(file_div);
+                            imgs_ul_id_jquery.show();
+                        }
+
+                        if (response.code && response.code == 1 && response.data && response.data.epii_eval == 1) {
+                            EpiiAdmin.eval(response.data.cmds);
+                        }
                     }
 
 
                     var onDomUploadSuccess = $(button).data("upload-success");
                     if (onDomUploadSuccess && window[onDomUploadSuccess] && (typeof window[onDomUploadSuccess] == "function")) {
-                        window[onDomUploadSuccess](up, response);
+                        window[onDomUploadSuccess](up, response?response:info.response);
                     }
 
 
                 },
                 UploadComplete: function (up, files) {
+
                     var browse_button = up.settings.browse_button;
                     $(browse_button).prop("disabled", false).html($(browse_button).data("bakup-html"));
 
@@ -301,7 +311,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
 
                     var onDomUploadSuccess = $(button).data("upload-complete");
                     if (onDomUploadSuccess && window[onDomUploadSuccess] && (typeof window[onDomUploadSuccess] == "function")) {
-                        window[onDomUploadSuccess](up, response ? response : null);
+                        window[onDomUploadSuccess](up);
                     }
                 },
 
@@ -312,7 +322,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
                     var button = up.settings.button;
                     var onDomUploadSuccess = $(button).data("upload-error");
                     if (onDomUploadSuccess && window[onDomUploadSuccess] && (typeof window[onDomUploadSuccess] == "function")) {
-                        window[onDomUploadSuccess](up, err);
+                        window[onDomUploadSuccess](up);
                     } else {
                         alert(err.msg);
                     }
