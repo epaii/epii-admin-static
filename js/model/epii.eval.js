@@ -5,7 +5,11 @@
     var windowobject = window;
 
     function getWindow() {
-        return EpiiAdmin.this_window;
+        if(  EpiiAdmin.this_window)
+        {
+            return EpiiAdmin.this_window;
+        }
+        return EpiiAdmin.windows[Args.window_id];
     }
 
     var run = {
