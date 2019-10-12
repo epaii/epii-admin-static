@@ -280,11 +280,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
 
                         });
                         imgs_ul_id_jquery.append(file_div);
-
-
                         imgs_ul_id_jquery.show();
-
-
                     }
 
 
