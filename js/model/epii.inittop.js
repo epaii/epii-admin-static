@@ -283,6 +283,7 @@ define(["adminlte", "addtabs"], function (AdminLTE, Addtabs) {
             $.getJSON(Args.pluginsData.menu_badge_api, {menu_id: menu_id}, function (data) {
                 if (data && (data["code"] - 1 === 0) && (data["data"]) && (data["data"]["list"])) {
                     if (data["data"]["list"].length > 0) {
+                        $(".nav-sidebar  .nav-item span").remove();
                         data["data"]["list"].map(function (item) {
                             // console.log(item);
                             var li = $("[data-addtab=" + item.id + "]");
