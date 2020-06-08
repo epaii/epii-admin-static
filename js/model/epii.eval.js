@@ -30,6 +30,14 @@
                 run.eval(this);
             }.bind(this.onOk));
         },
+        confirm: function () {
+
+            EpiiAdmin.confirm(this, function () {
+                run.eval(this);
+            }.bind(this.onOk), function () {
+                run.eval(this);
+            }.bind(this.onCancel));
+        },
         refresh: function () {
 
 
