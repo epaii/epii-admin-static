@@ -14,15 +14,19 @@
 
     var run = {
         eval: function (c) {
-            var cmd = c.__cmd__;
-            if (run.hasOwnProperty(cmd)) {
-
-                if (c.__time__) {
-                    setTimeout(run[cmd].bind(c), c.__time__ - 0);
-                } else {
-                    run[cmd].call(c);
+            if(c && c.hasOwnProperty("__cmd__"))
+            {
+                var cmd = c.__cmd__;
+                if (run.hasOwnProperty(cmd)) {
+    
+                    if (c.__time__) {
+                        setTimeout(run[cmd].bind(c), c.__time__ - 0);
+                    } else {
+                        run[cmd].call(c);
+                    }
                 }
             }
+     
         },
         alert: function () {
 
