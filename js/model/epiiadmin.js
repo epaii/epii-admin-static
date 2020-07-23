@@ -250,7 +250,8 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
                 {
                     icon: 3,
                     msg: "您确定要操作吗？",
-                    offset: "50px",
+                    intop:true,
+                    offset: "auto",
                     btn: [epiiAdmin.getTrueValue(data['btnOk'], "确定"), epiiAdmin.getTrueValue(data['btnCancel'], "取消")]
                 }, data);
             if (!data['onOk']) {
