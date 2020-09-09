@@ -276,10 +276,23 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
                     area: data.area ? data.area.split(",") : ['800px', '350px'],
                     btn: [epiiAdmin.getTrueValue(data['btnOk'], "确定"), epiiAdmin.getTrueValue(data['btnCancel'], "取消")]
                 }, data);
+                if (!data['onOk']) {
+                    data['onOk'] = "tag.a";
+                    
+                }
             onOk = epiiAdmin.tools.getFunction(onOk, data, "onOk");
             onCancel = epiiAdmin.tools.getFunction(onCancel, data, "onCancel");
             epiiAdmin.tools.getLayer(data).prompt(data, function (value, index, elem) {
                 epiiAdmin.tools.getLayer(data).close(index);
+                if(data['onOk'] == "tag.a"){
+                    var $this = $(data["this"]);
+                    if (!$this.attr("url")) {
+                        $this.attr("url",$this.attr("href") || $this.attr("data-url"));
+                    }
+                    
+                    if ($this.attr("href")) $this.attr("href", EpiiAdmin.tools.replaceInData($this.attr("url"), {value: value}));
+                    if ($this.attr("data-url")) $this.attr("data-url", $this.attr("href"));
+                }
                 if (onOk) onOk(value);
             });
         };
