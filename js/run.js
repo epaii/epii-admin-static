@@ -3,8 +3,35 @@
  */
 //环境变量，从应用程序传递过来
 //console.log(Args);
+
+Args.__gets = (function (url) {
+    var u = url.split("?");
+    if (typeof (u[1]) === "string") {
+        u = u[1].split("&");
+        var get = {};
+        for (var i in u) {
+            var j = u[i].split("=");
+            get[j[0]] = j[1];
+        }
+        return get;
+    } else {
+        return {};
+    }
+})(window.location.href);
+
+Args.get = Args.params =  function(key,dvalue){
+     
+    if(key===undefined){
+        return Args.__gets;
+    }
+    if(Args.__gets.hasOwnProperty(key)){
+        return Args.__gets[key];
+    }else return dvalue;
+}
+
 define("window", window);
 define("args", Args);
+
 
 require.config({
     urlArgs: "v=" + Args.version,

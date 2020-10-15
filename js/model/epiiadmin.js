@@ -10,6 +10,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
     var epiiAdmin = [];
 
     var this_window_id = Args.window_id;
+
     window.this_window_id = this_window_id;
 
     var need_new = false;
@@ -31,6 +32,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
 
 
         epiiAdmin.windows = [];
+
         epiiAdmin.bindWindow = function (id, obj) {
 
             if (!obj) {
@@ -43,6 +45,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
         };
 
         epiiAdmin.bindWindow(this_window_id, window);
+ 
         epiiAdmin.getTrueValue = function () {
             for (var i = 0; i < arguments.length; i++) {
                 if (arguments[i]) {
@@ -450,6 +453,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
 
 //auto form
     epiiAdmin.bindWindow(this_window_id);
+ 
     var forms, tables, citys, selects, input_search, uploads,uploads_pre;
     if ((forms = $("form[data-form=1]")) && forms.length > 0) {
         require(['form'], function (Form) {
