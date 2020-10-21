@@ -1,13 +1,117 @@
 define(["plupload", "jquery"], function (Plupload, $) {
 
+    function showDefaultValues(that){
+        if (that.inputObj) {
+            var val = that.inputObj.val();
+            var urls = [];
+            if(that.inputObj.data("src")){
+                urls =that.inputObj.data("src").split(",")
+            }
+            that.inputObj.val("");
+            
+           val.split(",").forEach(function(value,key){
+               if(value.length>0){
+                   showImgs(that,{url:urls.length>key?urls[key]:value,path:value,code:1})
+               }
+           });
+            
+        }
+    }
+
+    function showImgs(that,response){
+        var that_jq = $(that);
+        
+        var img_id = that_jq.data("img-id") ? that_jq.data("img-id") : "";
+        var imgs_ul_id_jquery= that.imgs_ul_id_jquery;
+        var img_style = that.img_style;
+
+        var inputObj = that.inputObj;
+        if (inputObj) {
+            var urlArr = [];
+            if (that.multiple && inputObj.val() !== "") {
+                urlArr.push(inputObj.val());
+            }
+            urlArr.push(response.path);
+            inputObj.val(urlArr.join(",")).trigger("change");
+        }   
+      
+        
+
+        if (img_id && !that.multiple) {
+            var img = $("#" + img_id);
+            img.attr("src", response.url);
+            if (img_style)
+                img.attr("style", img_style);
+            img.show();
+
+        } else if (imgs_ul_id_jquery && that.multiple) {
+
+            var name = response.url;
+            var icon = out.getFileIcon(name);
+
+
+            var file_div = $("<div class='epii-upload-files-div' ><img class='epii-upload-file-icon' layer-index='" + imgs_ul_id_jquery.find(".epii-upload-files-div").length + "' src='" + icon + "' style='" + img_style + "'></div>");
+
+
+            //var close = $("<img  class='epii-upload-file-close'  src='" + del + "'  >");
+            var close = $('<a  class="epii-upload-file-close" href="javascript:;"></a>');
+            close.click(
+                (function (input, val) {
+                    return function () {
+
+                        if (input) {
+                            var val_real = input.val() + ",";
+                            val_real = val_real.replace(val + ",", "").replace(/,$/g, '');
+
+                            input.val(val_real).trigger("change");
+                        }
+                        $(this).parent().remove();
+                    };
+
+                })(inputObj, response.path)
+            );
+            close.hide();
+            file_div.append(close);
+
+            file_div.mouseout(function () {
+                if (this.getElementsByClassName("epii-upload-file-close").length > 0) {
+                    $(this).find(".epii-upload-file-close").hide();
+                }
+            });
+            file_div.mouseover(function () {
+                if (this.getElementsByClassName("epii-upload-file-close").length > 0) {
+                    $(this).find(".epii-upload-file-close").show();
+                }
+            });
+
+            file_div.find(".epii-upload-file-icon").click(function () {
+
+                if (this.getElementsByClassName("epii-upload-file-close").length > 0) {
+                    $(this).find(".epii-upload-file-close").remove();
+                }
+                //  imgs_ul_id_jquery.find(".epii-upload-file-close").hide();
+                window.top.layer.photos({
+                    photos: imgs_ul_id_jquery,
+                    closeBtn: 1,
+                    anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+                });
+
+            });
+            imgs_ul_id_jquery.append(file_div);
+            imgs_ul_id_jquery.show();
+        }
+
+        if (response.code && response.code == 1 && response.data && response.data.epii_eval == 1) {
+            EpiiAdmin.eval(response.data.cmds);
+        }
+    }
+
+
+
 
     var out = [];
 
-    // out.showFile=function(obj,file)
-    // {
-    //
-    // };
-
+ 
 
     out.getFileIcon = function (file) {
         var type = file.split('.');
@@ -34,6 +138,9 @@ define(["plupload", "jquery"], function (Plupload, $) {
         }
         return icon;
     };
+
+
+
 
 
     out.init = function (buttons) {
@@ -64,13 +171,8 @@ define(["plupload", "jquery"], function (Plupload, $) {
             browse_jq = that.browse_dom;
 
         }
-        if (!browse_jq) {
-            var id = that_jq.prop("id");
-            if (!id) {
-                alert("All upload dom must has a id attr");
-                return;
-            }
-            browse_jq = document.getElementById(id);
+        if (!browse_jq) { 
+            browse_jq = that;
         }
 
         var url = that_jq.data("url");
@@ -83,12 +185,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
         var mimetype = that_jq.data("mimetype");
         var multipart = that_jq.data("multipart");
         var multiple = that_jq.data("multiple");
-
-
-        var input_id = that_jq.data("input-id") ? that_jq.data("input-id") : "";
-
-        var img_id = that_jq.data("img-id") ? that_jq.data("img-id") : "";
-
+       
         var imgs_ul_id = that_jq.data("preview-id") ? that_jq.data("preview-id") : "";
         if (!imgs_ul_id)
             imgs_ul_id = that_jq.data("imgs-id") ? that_jq.data("imgs-id") : "";
@@ -101,9 +198,13 @@ define(["plupload", "jquery"], function (Plupload, $) {
         } else if (that.preview_dom) {
             imgs_ul_id_jquery = $(that.preview_dom);
         }
+       
+
         var img_style = $(that).data("preview-style") ? $(that).data("preview-style") : "";
         if (!img_style)
             img_style = $(that).data("img-style") ? $(that).data("img-style") : "";
+
+
 
 
         maxsize = typeof maxsize !== "undefined" ? maxsize : d_config.maxsize;
@@ -122,6 +223,21 @@ define(["plupload", "jquery"], function (Plupload, $) {
             mimetype = mimetypeArr;
         }
 
+        var input_id = that_jq.data("input-id") ? that_jq.data("input-id") : "";
+
+        var inputObj = null;
+        if (input_id) {
+            inputObj = $("#" + input_id);
+        }   
+
+
+        that.imgs_ul_id_jquery = imgs_ul_id_jquery;
+        that.multiple = multiple;
+        that.img_style = img_style;
+        that.inputObj  = inputObj;
+
+        //default value
+        showDefaultValues(that);
 
         var option = {
             runtimes: 'html5,flash,silverlight,html4',
@@ -159,11 +275,12 @@ define(["plupload", "jquery"], function (Plupload, $) {
                                 var value = $.trim(inputObj.val());
                                 var nums = value === '' ? 0 : value.split(/\,/).length;
                                 var remains = maxcount - nums;
+                               
                                 if (files.length > remains) {
                                     for (var i = 0; i < files.length; i++) {
                                         up.removeFile(files[i]);
                                     }
-                                    alert('You can upload up to ' + remains + ' file');
+                                    alert('最多可上传 ' + maxcount + ' 文件');
                                     return false;
                                 }
                             }
@@ -213,84 +330,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
                             return;
                         }
 
-                        var inputObj;
-                        if (input_id) {
-                            var urlArr = [];
-                            inputObj = $("#" + input_id);
-                            if ($(button).data("multiple") && inputObj.val() !== "") {
-                                urlArr.push(inputObj.val());
-                            }
-                            urlArr.push(response.path);
-                            inputObj.val(urlArr.join(",")).trigger("change");
-                        }
-
-                        if (img_id && !$(button).data("multiple")) {
-                            var img = $("#" + img_id);
-                            img.attr("src", response.url);
-                            if (img_style)
-                                img.attr("style", img_style);
-                            img.show();
-
-                        } else if (imgs_ul_id_jquery && $(button).data("multiple")) {
-
-                            var name = response.url;
-                            var icon = out.getFileIcon(name);
-
-
-                            var file_div = $("<div class='epii-upload-files-div' ><img class='epii-upload-file-icon' layer-index='" + imgs_ul_id_jquery.find(".epii-upload-files-div").length + "' src='" + icon + "' style='" + img_style + "'></div>");
-
-
-                            //var close = $("<img  class='epii-upload-file-close'  src='" + del + "'  >");
-                            var close = $('<a  class="epii-upload-file-close" href="javascript:;"></a>');
-                            close.click(
-                                (function (input, val) {
-                                    return function () {
-
-                                        if (input) {
-                                            var val_real = input.val() + ",";
-                                            val_real = val_real.replace(val + ",", "").replace(/,$/g, '');
-
-                                            input.val(val_real).trigger("change");
-                                        }
-                                        $(this).parent().remove();
-                                    };
-
-                                })(inputObj, response.path)
-                            );
-                            close.hide();
-                            file_div.append(close);
-
-                            file_div.mouseout(function () {
-                                if (this.getElementsByClassName("epii-upload-file-close").length > 0) {
-                                    $(this).find(".epii-upload-file-close").hide();
-                                }
-                            });
-                            file_div.mouseover(function () {
-                                if (this.getElementsByClassName("epii-upload-file-close").length > 0) {
-                                    $(this).find(".epii-upload-file-close").show();
-                                }
-                            });
-
-                            file_div.find(".epii-upload-file-icon").click(function () {
-
-                                if (this.getElementsByClassName("epii-upload-file-close").length > 0) {
-                                    $(this).find(".epii-upload-file-close").remove();
-                                }
-                                //  imgs_ul_id_jquery.find(".epii-upload-file-close").hide();
-                                window.top.layer.photos({
-                                    photos: imgs_ul_id_jquery,
-                                    closeBtn: 1,
-                                    anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
-                                });
-
-                            });
-                            imgs_ul_id_jquery.append(file_div);
-                            imgs_ul_id_jquery.show();
-                        }
-
-                        if (response.code && response.code == 1 && response.data && response.data.epii_eval == 1) {
-                            EpiiAdmin.eval(response.data.cmds);
-                        }
+                         showImgs(button,response)
                     }
 
 
@@ -333,8 +373,8 @@ define(["plupload", "jquery"], function (Plupload, $) {
         };
 
 
-        out.list[id] = new Plupload.Uploader(option);
-        out.list[id].init();
+        out.list.push( new Plupload.Uploader(option));
+        out.list[out.list.length-1].init();
 
 
     };
