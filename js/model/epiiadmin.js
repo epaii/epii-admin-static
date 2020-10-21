@@ -485,18 +485,13 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
             epii_search.init(input_search);
         })
     }
-    if ((uploads = $('[data-upload="1"]')) && uploads.length > 0) {
-        require(['epii-upload'], function (epii_uploads) {
 
-            epii_uploads.init(uploads);
-        })
-    }
-    if ((uploads_pre = $('[data-upload-preview="1"]')) && uploads_pre.length > 0) {
-        require(['epii-upload-preview'], function (epii_uploads_pre) {
+    require(['epii-upload-init'], function (upload) {
 
-            epii_uploads_pre.init(uploads_pre);
-        })
-    }
+        upload.init();
+    })  
+    
+   
 
 
 

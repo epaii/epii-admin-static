@@ -59,7 +59,8 @@ require.config({
         "input-search": "model/epii.suggest",
         "plupload": Args.pluginsUrl + 'plupload/js/plupload.full.min',
         "epii-upload": "model/epii.upload",
-        "epii-upload-preview": "model/epii.upload.preview"
+        "epii-upload-preview": "model/epii.upload.preview",
+        "epii-upload-init": "model/epii.upload.init",
     },
     shim: {
         'bootstrap': ['jquery'],
