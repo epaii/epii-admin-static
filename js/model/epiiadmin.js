@@ -196,8 +196,8 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
             options = $.extend({
                 type: "POST",
                 dataType: "json",
-                processData: false,  
-                contentType: false,  
+                // processData: false,  
+                // contentType: false,  
                 success: function (ret) {
                     layer.close(index);
                     if (ret.code && ret.code == 1 && ret.data && ret.data.epii_eval == 1) {
