@@ -239,7 +239,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
         //default value
         showDefaultValues(that);
 
-        var option = {
+        var uploader = new Plupload.Uploader( {
             runtimes: 'html5,flash,silverlight,html4',
             multi_selection: multiple, //是否允许多选批量上传
             browse_button: browse_jq, // 浏览按钮的ID
@@ -254,7 +254,11 @@ define(["plupload", "jquery"], function (Plupload, $) {
             multipart_params: $.isArray(multipart) ? {} : multipart,
             init: {
                 PostInit: function () {
-                    //alert("PostInit");
+                    // uploader.setOption("headers", {
+                    //     "Content-Type"    : "multipart/form-data" 
+                        
+                        
+                    // });
                 },
 
                 FilesAdded: function (up, files) {
@@ -370,10 +374,10 @@ define(["plupload", "jquery"], function (Plupload, $) {
             },
 
             button: that
-        };
+        });
 
 
-        out.list.push( new Plupload.Uploader(option));
+        out.list.push( uploader);
         out.list[out.list.length-1].init();
 
 
