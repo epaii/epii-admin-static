@@ -154,8 +154,8 @@ define(["plupload", "jquery"], function (Plupload, $) {
     out.initOne = function (that) {
 
         var d_config = {
-            maxsize: "2048kb",
-            mimetype: "image/jpg,jpg,gif,png,jpeg,zip,rar,pdf",
+            maxsize: "20480kb",
+            mimetype: "jpg,jpg,gif,png,jpeg,zip,rar,pdf",
             url: (Args.pluginsData && Args.pluginsData.upload_url) ? Args.pluginsData.upload_url : ""
 
         };

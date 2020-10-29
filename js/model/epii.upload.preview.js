@@ -21,7 +21,7 @@ define(["epii-upload", "jquery"], function (epii_upload, $) {
             require(["epii-upload-phone"], function (phone_upload) {
                 var phone_click = phone_brower_dome.find(".epii-upload-preview-add-phone");
                 var data_mimetype =  $(div).attr("data-mimetype");
-                if(!data_mimetype) data_mimetype = "image/jpg,jpg,gif,png,jpeg,zip,rar,pdf";
+                if(!data_mimetype) data_mimetype = "jpg,gif,png,jpeg,zip,rar,pdf";
                 phone_click.click(function () {
                     phone_click.hide();
                     phone_upload.getFiles( $.extend({
