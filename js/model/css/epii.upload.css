@@ -32,8 +32,9 @@
     border: 1px solid #8c939d;
     margin-top: 10px;
     padding: 0px 25px;
-    width: 1156px;
-    border-radius: 10px;
+    width: 98%;
+    margin: 0px auto;
+    border-radius: 2px;
 }
 .epii-upload-preview-btn{
     border: 1px dashed #8c939d;
