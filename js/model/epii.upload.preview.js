@@ -7,15 +7,16 @@ define(["epii-upload", "jquery"], function (epii_upload, $) {
         })
     };
     out.initOne = function (div) {
-        var add = Args.baseUrl + "../img/tubiao/add.png"
+        var add = Args.baseUrl + "../img/tubiao/upload_pc.jpg"
+        var add_phone =  Args.baseUrl + "../img/tubiao/upload_phone.jpg"
         var pre_dom = $("<div class='epii-upload-preview-files'><div></div></div>");
 
-        var brower_dom = $("<div class='epii-upload-preview-btn'><div class='epii-upload-preview-add'><img src='" + add + "'></div></div>");
+        var brower_dom = $("<div class='epii-upload-preview-btn'><div class='epii-upload-preview-add'><img src='" + add + "'><div class='epii-upload-preview-add-phone-title'>文件选择</div></div></div>");
         $(div).append(pre_dom);
         $(div).append(brower_dom);
         var closephone = $(div).attr("data-enable-phone") && ($(div).attr("data-enable-phone")-0==0);
         if (  Args.pluginsData.epii_upload_phone_enable && !closephone )  {
-            var phone_brower_dome = $("<div class='epii-upload-preview-btn-phone'><div class='epii-upload-preview-add-phone'>手机上传</div><div class='epii-upload-phone-qrcode'></div></div>")
+            var phone_brower_dome = $("<div class='epii-upload-preview-btn-phone'><div class='epii-upload-preview-add-phone'><img src='" + add_phone + "'><div class='epii-upload-preview-add-phone-title'>手机上传</div></div><div class='epii-upload-phone-qrcode'></div></div>")
             $(div).append(phone_brower_dome);
             require(["epii-upload-phone"], function (phone_upload) {
                 var phone_click = phone_brower_dome.find(".epii-upload-preview-add-phone");
