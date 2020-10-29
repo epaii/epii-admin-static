@@ -9,18 +9,26 @@ define(["jquery"], function ($) {
     out.initOne = function (div) {
 
     };
-    out.getFiles = function (options,ongetfiles) {
+    out.getFiles = function (options, ongetfiles) {
         require(["qrcode", "epii-websocket-p2p"], function (QRCode, WebSocketP2P) {
-            var server_name = (new Date().getTime())+"_"+Math.random(1000,10000);
+            var server_name = (new Date().getTime()) + "_" + Math.random(1000, 10000);
             console.log(server_name)
-            var client = new WebSocketP2P(options.ws, options.server_name +server_name , {
+            var client = new WebSocketP2P(options.ws, options.server_name + server_name, {
                 name: "服务端"
             });
+
+            function getCookie(name) {
+                var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+                if (arr = document.cookie.match(reg))
+                    return unescape(arr[2]);
+                else
+                    return null;
+            }
             client.ready(function () {
                 var has_connect = false;
                 options.qrcode_img.style.display = "block";
                 var qrcode = new QRCode(options.qrcode_img, {
-                    text: options.client_url+"&server_id="+server_name+"&file_types="+options.file_types,
+                    text: options.client_url + "&server_id=" + server_name + "&file_types=" + options.file_types + "&sv=" + getCookie("PHPSESSID"),
                     width: 250,
                     height: 250
                 });
@@ -34,14 +42,14 @@ define(["jquery"], function ($) {
                     callback();
                 });
                 client.regServer("onfile", function (data, callback) {
-                  
-                    
+
+
                     var imgs = [];
                     var urls = data.data.files.split(",");
                     urls.forEach(value => {
                         imgs.push({
                             url: options.file_pre + value,
-                            path:value
+                            path: value
                         })
                     });
                     ongetfiles(imgs);
