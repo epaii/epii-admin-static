@@ -12,6 +12,7 @@ define(["jquery"], function ($) {
     out.getFiles = function (options,ongetfiles) {
         require(["qrcode", "epii-websocket-p2p"], function (QRCode, WebSocketP2P) {
             var server_name = (new Date().getTime())+"_"+Math.random(1000,10000);
+            console.log(server_name)
             var client = new WebSocketP2P(options.ws, options.server_name +server_name , {
                 name: "服务端"
             });
@@ -19,7 +20,7 @@ define(["jquery"], function ($) {
                 var has_connect = false;
                 options.qrcode_img.style.display = "block";
                 var qrcode = new QRCode(options.qrcode_img, {
-                    text: options.client_url+"&server_id="+server_name,
+                    text: options.client_url+"&server_id="+server_name+"&file_types="+options.file_types,
                     width: 250,
                     height: 250
                 });

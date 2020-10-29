@@ -20,13 +20,16 @@ define(["epii-upload", "jquery"], function (epii_upload, $) {
             $(div).append(phone_brower_dome);
             require(["epii-upload-phone"], function (phone_upload) {
                 var phone_click = phone_brower_dome.find(".epii-upload-preview-add-phone");
+                var data_mimetype =  $(div).attr("data-mimetype");
+                if(!data_mimetype) data_mimetype = "jpg,gif,png,jpeg";
                 phone_click.click(function () {
                     phone_click.hide();
                     phone_upload.getFiles( $.extend({
                         qrcode_img: phone_brower_dome[0].getElementsByClassName("epii-upload-phone-qrcode")[0],
                         oninit:function(){
                             phone_brower_dome.find(".epii-upload-phone-qrcode-div").show();
-                        }
+                        },
+                        file_types:data_mimetype
                     },JSON.parse(Args.pluginsData.epii_upload_phone)),function(imgs){
                         epii_upload.addFiles(div,imgs);
                     });
