@@ -61,6 +61,11 @@ require.config({
         "epii-upload": "model/epii.upload",
         "epii-upload-preview": "model/epii.upload.preview",
         "epii-upload-init": "model/epii.upload.init",
+        "epii-upload-phone": "model/epii.upload.phone",
+        "epii-websocket-p2p": Args.pluginsUrl +"epii-websocket/epii-websocket-p2p",
+        "qrcode": Args.pluginsUrl +"qrcode/qrcode.min",
+
+
     },
     shim: {
         'bootstrap': ['jquery'],
@@ -84,7 +89,10 @@ require.config({
         'bootstrap-select': ["jquery", "bootstrap", 'css!' + Args.pluginsUrl + 'bootstrap-select/dist/css/bootstrap-select.min.css'],
         'bootstrap-select-lang': ['bootstrap-select'],
         "epii-upload": ["jquery", "plupload", "css!model/css/epii.upload.css"],
-        "epii-upload-preview": ["epii-upload"]
+        "epii-upload-preview": ["epii-upload"],
+        'qrcode': {
+            exports: 'QRCode'
+        }
 
     },
     map: {

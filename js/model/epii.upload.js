@@ -19,6 +19,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
     }
 
     function showImgs(that,response){
+        
         var that_jq = $(that);
         
         var img_id = that_jq.data("img-id") ? that_jq.data("img-id") : "";
@@ -382,6 +383,16 @@ define(["plupload", "jquery"], function (Plupload, $) {
 
 
     };
+    out.addFiles = function(upload_dom,imgs){
+     
+        if(!Array.isArray(imgs)){
+            imgs = [imgs];
+        }
+        imgs.forEach(function(item){
+            
+             showImgs(upload_dom,item);
+        });
+    }
 
 
     return out;
