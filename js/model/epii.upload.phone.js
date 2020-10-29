@@ -23,6 +23,7 @@ define(["jquery"], function ($) {
                     width: 250,
                     height: 250
                 });
+                options.oninit();
                 client.regServer("onconnect", function (data, callback) {
                     if (has_connect) {
                         callback();
