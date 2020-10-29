@@ -27,6 +27,8 @@ define(["jquery"], function ($) {
             client.ready(function () {
                 var has_connect = false;
                 options.qrcode_img.style.display = "block";
+                var text = options.client_url + "&server_id=" + server_name + "&file_types=" + options.file_types + "&sv=" + getCookie("PHPSESSID");
+                console.log(text);
                 var qrcode = new QRCode(options.qrcode_img, {
                     text: options.client_url + "&server_id=" + server_name + "&file_types=" + options.file_types + "&sv=" + getCookie("PHPSESSID"),
                     width: 250,

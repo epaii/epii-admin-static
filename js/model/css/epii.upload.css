@@ -132,10 +132,12 @@
 
     .epii-upload-preview-add {
       margin-top: 0;
+      font-size: 25px;
     }
 
     .epii-upload-preview-add img,
     .epii-upload-preview-add-phone img {
+        margin-top: 10px;
       width: 50%;
     }
 
