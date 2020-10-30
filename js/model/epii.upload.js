@@ -1,29 +1,29 @@
-define(["plupload", "jquery"], function (Plupload, $) {
+define(["plupload", "jquery", "epii-imgs-preview"], function (Plupload, $, file_preview) {
 
-    function showDefaultValues(that){
+    function showDefaultValues(that) {
         if (that.inputObj) {
             var val = that.inputObj.val();
             var urls = [];
-            if(that.inputObj.data("src")){
-                urls =that.inputObj.data("src").split(",")
+            if (that.inputObj.data("src")) {
+                urls = that.inputObj.data("src").split(",")
             }
             that.inputObj.val("");
-            
-           val.split(",").forEach(function(value,key){
-               if(value.length>0){
-                   showImgs(that,{url:urls.length>key?urls[key]:value,path:value,code:1})
-               }
-           });
-            
+
+            val.split(",").forEach(function (value, key) {
+                if (value.length > 0) {
+                    showImgs(that, { url: urls.length > key ? urls[key] : value, path: value, code: 1 })
+                }
+            });
+
         }
     }
 
-    function showImgs(that,response){
-        
+    function showImgs(that, response) {
+
         var that_jq = $(that);
-        
+
         var img_id = that_jq.data("img-id") ? that_jq.data("img-id") : "";
-        var imgs_ul_id_jquery= that.imgs_ul_id_jquery;
+        var imgs_ul_id_jquery = that.imgs_ul_id_jquery;
         var img_style = that.img_style;
 
         var inputObj = that.inputObj;
@@ -34,9 +34,9 @@ define(["plupload", "jquery"], function (Plupload, $) {
             }
             urlArr.push(response.path);
             inputObj.val(urlArr.join(",")).trigger("change");
-        }   
-      
-        
+        }
+
+
 
         if (img_id && !that.multiple) {
             var img = $("#" + img_id);
@@ -48,10 +48,10 @@ define(["plupload", "jquery"], function (Plupload, $) {
         } else if (imgs_ul_id_jquery && that.multiple) {
 
             var name = response.url;
-            var icon = out.getFileIcon(name);
+            var icon = file_preview.getFileIcon(name);
+            var isImg = file_preview.isImg(response.url);
 
-
-            var file_div = $("<div class='epii-upload-files-div' ><img class='epii-upload-file-icon' layer-index='" + imgs_ul_id_jquery.find(".epii-upload-files-div").length + "' src='" + icon + "' style='" + img_style + "'></div>");
+            var file_div = $("<div class='epii-upload-files-div' ><img  data-file='" + response.url + "' class='epii-upload-file-icon " + (isImg ? ("epii-upload-file-icon-img'") : "  '") + " src='" + icon + "'  ></div>");
 
 
             //var close = $("<img  class='epii-upload-file-close'  src='" + del + "'  >");
@@ -85,17 +85,31 @@ define(["plupload", "jquery"], function (Plupload, $) {
                 }
             });
 
+
+
+
             file_div.find(".epii-upload-file-icon").click(function () {
 
                 if (this.getElementsByClassName("epii-upload-file-close").length > 0) {
                     $(this).find(".epii-upload-file-close").remove();
                 }
+                if (file_preview.isImg(response.url)) {
+                    window.top.layer.photos({
+                        photos: imgs_ul_id_jquery,
+                        closeBtn: 1,
+                        img: ".epii-upload-file-icon-img",
+                        anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+                    });
+                }
+                else if (file_preview.isPdf(response.url)) {
+
+                    EpiiAdmin.openInDialog(response.url, "预览", true)
+
+                } else if (!isImg) {
+                    window.open(url, "_blank")
+                }
                 //  imgs_ul_id_jquery.find(".epii-upload-file-close").hide();
-                window.top.layer.photos({
-                    photos: imgs_ul_id_jquery,
-                    closeBtn: 1,
-                    anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
-                });
+
 
             });
             imgs_ul_id_jquery.append(file_div);
@@ -111,36 +125,6 @@ define(["plupload", "jquery"], function (Plupload, $) {
 
 
     var out = [];
-
- 
-
-    out.getFileIcon = function (file) {
-        var type = file.split('.');
-        var ext = type[type.length - 1];
-        var icon = "";
-        switch (ext) {
-            case "png":
-            case "jpeg":
-            case "gif":
-            case "jpg":
-                icon = file;
-                break;
-            case "zip":
-            case "pdf":
-            case "docx":
-            case "doc":
-            case "rar":
-                icon = Args.baseUrl + "../img/tubiao/" + ext + ".png"
-                break;
-            default:
-                icon = Args.baseUrl + "../img/tubiao/qita.png"
-                break;
-
-        }
-        return icon;
-    };
-
-
 
 
 
@@ -172,7 +156,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
             browse_jq = that.browse_dom;
 
         }
-        if (!browse_jq) { 
+        if (!browse_jq) {
             browse_jq = that;
         }
 
@@ -186,7 +170,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
         var mimetype = that_jq.data("mimetype");
         var multipart = that_jq.data("multipart");
         var multiple = that_jq.data("multiple");
-       
+
         var imgs_ul_id = that_jq.data("preview-id") ? that_jq.data("preview-id") : "";
         if (!imgs_ul_id)
             imgs_ul_id = that_jq.data("imgs-id") ? that_jq.data("imgs-id") : "";
@@ -195,11 +179,11 @@ define(["plupload", "jquery"], function (Plupload, $) {
 
         if (imgs_ul_id) {
             imgs_ul_id_jquery = $("#" + imgs_ul_id)
-            imgs_ul_id_jquery.css({"overflow": "auto"});
+            imgs_ul_id_jquery.css({ "overflow": "auto" });
         } else if (that.preview_dom) {
             imgs_ul_id_jquery = $(that.preview_dom);
         }
-       
+
 
         var img_style = $(that).data("preview-style") ? $(that).data("preview-style") : "";
         if (!img_style)
@@ -219,7 +203,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
         if (mimetype && mimetype !== "*" && mimetype.indexOf("/") === -1) {
             var tempArr = mimetype.split(',');
             for (var i = 0; i < tempArr.length; i++) {
-                mimetypeArr.push({title: "支持的文件", extensions: tempArr[i]});
+                mimetypeArr.push({ title: "支持的文件", extensions: tempArr[i] });
             }
             mimetype = mimetypeArr;
         }
@@ -229,18 +213,18 @@ define(["plupload", "jquery"], function (Plupload, $) {
         var inputObj = null;
         if (input_id) {
             inputObj = $("#" + input_id);
-        }   
+        }
 
 
         that.imgs_ul_id_jquery = imgs_ul_id_jquery;
         that.multiple = multiple;
         that.img_style = img_style;
-        that.inputObj  = inputObj;
+        that.inputObj = inputObj;
 
         //default value
         showDefaultValues(that);
 
-        var uploader = new Plupload.Uploader( {
+        var uploader = new Plupload.Uploader({
             runtimes: 'html5,flash,silverlight,html4',
             multi_selection: multiple, //是否允许多选批量上传
             browse_button: browse_jq, // 浏览按钮的ID
@@ -257,8 +241,8 @@ define(["plupload", "jquery"], function (Plupload, $) {
                 PostInit: function () {
                     // uploader.setOption("headers", {
                     //     "Content-Type"    : "multipart/form-data" 
-                        
-                        
+
+
                     // });
                 },
 
@@ -280,7 +264,7 @@ define(["plupload", "jquery"], function (Plupload, $) {
                                 var value = $.trim(inputObj.val());
                                 var nums = value === '' ? 0 : value.split(/\,/).length;
                                 var remains = maxcount - nums;
-                               
+
                                 if (files.length > remains) {
                                     for (var i = 0; i < files.length; i++) {
                                         up.removeFile(files[i]);
@@ -335,13 +319,13 @@ define(["plupload", "jquery"], function (Plupload, $) {
                             return;
                         }
 
-                         showImgs(button,response)
+                        showImgs(button, response)
                     }
 
 
                     var onDomUploadSuccess = $(button).data("upload-success");
                     if (onDomUploadSuccess && window[onDomUploadSuccess] && (typeof window[onDomUploadSuccess] == "function")) {
-                        window[onDomUploadSuccess](up, response?response:info.response);
+                        window[onDomUploadSuccess](up, response ? response : info.response);
                     }
 
 
@@ -378,19 +362,19 @@ define(["plupload", "jquery"], function (Plupload, $) {
         });
 
 
-        out.list.push( uploader);
-        out.list[out.list.length-1].init();
+        out.list.push(uploader);
+        out.list[out.list.length - 1].init();
 
 
     };
-    out.addFiles = function(upload_dom,imgs){
-     
-        if(!Array.isArray(imgs)){
+    out.addFiles = function (upload_dom, imgs) {
+
+        if (!Array.isArray(imgs)) {
             imgs = [imgs];
         }
-        imgs.forEach(function(item){
-            
-             showImgs(upload_dom,item);
+        imgs.forEach(function (item) {
+
+            showImgs(upload_dom, item);
         });
     }
 
