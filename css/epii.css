@@ -163,3 +163,172 @@
 .label15 label {
     min-width: 15% !important;
 }
+
+
+
+
+.epii-upload-files-div {
+    margin: 10px 5px;
+    transition: all 0.6s;
+    position: relative;
+    float: left;
+}
+
+ 
+.epii-upload-file-close {
+
+    background: url(../js/plugins/layer/theme/default/icon.png) no-repeat;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    width: 30px;
+    height: 30px;
+    margin-left: 0;
+    background-position: -149px -31px;
+    background-position-x: -149px;
+    background-position-y: -31px;
+    z-index: 100;
+}
+
+.epii-upload-files-div:hover{
+    background: #343a409e;
+    border-radius: 10px;
+}
+.epii-upload-files-div:hover .epii-upload-file-icon{
+    opacity: 0.5;
+}
+.epii-upload-preview{
+    overflow: auto;
+    border: 0.5px solid #dcdcdc;
+    margin-top: 10px;
+    padding: 0px 25px;
+    width: 98%;
+    margin: 0px auto;
+    border-radius: 2px;
+ 
+}
+.epii-upload-preview-btn{
+    border: 1px dashed #8c939d;
+    float: left;
+    width: 200px;
+    height: 240px;
+    margin: 30px 10px;
+    border-radius: 10px;
+    text-align: center;
+
+}
+.epii-upload-preview-files{
+
+}
+ 
+
+
+.epii-upload-file-icon {
+    padding: 5px;
+    border-radius: 10px;
+    width: 200px;
+    height: 200px;
+    border: 0.5px solid #dcdcdc;
+  }
+
+  .epii-upload-preview-btn,
+  .epii-upload-preview-btn-phone {
+    border: 1px dashed #8c939d;
+    float: left;
+    width: 200px;
+    height: 200px;
+    margin: 10px 5px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .epii-upload-preview-add {
+    color: #8c939d;
+    font-size: 44px;
+    margin-top: 32px;
+    text-align: center;
+  }
+
+  .epii-upload-preview-add-phone-title {
+    font-size: 24px;
+    margin-top: 15px;
+  }
+
+  .epii-upload-preview-add-phone {
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    color: #8c939d;
+    margin-top: 32px;
+  }
+
+  .epii-upload-phone-qrcode img {
+    width: 71%;
+    margin: 16px auto 0;
+  }
+
+  .epii-upload-phone-qrcode-div .epii-upload-preview-add-phone-title {
+    font-size: 20px;
+    margin-top: 5px;
+  }
+  @media screen and (max-width:1200px) {
+    .epii-upload-files-div {
+      margin: 9px 5px;
+    }
+
+    .epii-upload-preview {
+      border: none;
+      width: 100%;
+      margin: 0 auto;
+      border-radius: 3px;
+      padding: 0;
+    }
+
+    .epii-upload-file-icon {
+      padding: 5px;
+      border-radius: 5px;
+      width: 100px;
+      height: 100px;
+      border: 0.5px solid #dcdcdc;
+    }
+
+    .epii-upload-preview-btn,
+    .epii-upload-preview-btn-phone {
+      float: left;
+      width: 100px;
+      height: 100px;
+      margin: 10px 5px;
+      border-radius: 5px;
+    }
+
+    .epii-upload-preview-add {
+      margin-top: 0;
+      font-size: 25px;
+    }
+
+    .epii-upload-preview-add img,
+    .epii-upload-preview-add-phone img {
+        margin-top: 10px;
+      width: 50%;
+    }
+
+    .epii-upload-preview-add-phone-title {
+      font-size: 16px;
+      margin-top: 1px;
+    }
+
+    .epii-upload-preview-add-phone {
+      margin-top: 14px;
+    }
+
+    .epii-upload-phone-qrcode img {
+      width: 69%;
+      margin: 8px auto 0;
+    }
+
+    .epii-upload-phone-qrcode-div .epii-upload-preview-add-phone-title {
+      font-size: 15px;
+      margin-top: 0px;
+    }
+
+  }

@@ -455,7 +455,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
 //auto form
     epiiAdmin.bindWindow(this_window_id);
  
-    var forms, tables, citys, selects, input_search, uploads,uploads_pre;
+    var forms, tables, citys, selects, input_search, imgs_previews;
     if ((forms = $("form[data-form=1]")) && forms.length > 0) {
         require(['form'], function (Form) {
             Form(forms);
@@ -486,7 +486,12 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
             epii_search.init(input_search);
         })
     }
+    if ((imgs_previews = $('[data-files-view=1]')) && imgs_previews.length > 0) {
+        require(['epii-imgs-preview'], function (epii_imgs_preview) {
 
+            epii_imgs_preview.init(imgs_previews);
+        })
+    }
     require(['epii-upload-init'], function (upload) {
 
         upload.init();

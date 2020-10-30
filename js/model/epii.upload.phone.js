@@ -26,15 +26,26 @@ define(["jquery"], function ($) {
             }
             client.ready(function () {
                 var has_connect = false;
-                options.qrcode_img.style.display = "block";
+              
                 var text = options.client_url + "&server_id=" + server_name + "&file_types=" + options.file_types + "&sv=" + getCookie("PHPSESSID");
                 //console.log(text);
                 var qrcode = new QRCode(options.qrcode_img, {
-                    text: options.client_url + "&server_id=" + server_name + "&file_types=" + options.file_types + "&sv=" + getCookie("PHPSESSID"),
-                    width: 250,
-                    height: 250
+                    text:text,
+                    width: 400,
+                    height: 400
                 });
+
                 options.oninit();
+               
+                $(options.qrcode_img).attr("layer-index",0);
+                $(options.qrcode_img).click(function(){
+                    window.top.layer.photos({
+                        photos: options.qrcode_img, 
+                    });
+                });
+               
+
+
                 client.regServer("onconnect", function (data, callback) {
                     if (has_connect) {
                         callback();

@@ -64,6 +64,7 @@ require.config({
         "epii-upload-phone": "model/epii.upload.phone",
         "epii-websocket-p2p": Args.pluginsUrl +"epii-websocket/epii-websocket-p2p",
         "qrcode": Args.pluginsUrl +"qrcode/qrcode.min",
+        "epii-imgs-preview": "model/epii.imgs.preview"
 
 
     },
@@ -88,7 +89,7 @@ require.config({
         "city-picker-core": [Args.pluginsUrl + 'city-picker/dist/js/city-picker.data', "css!" + Args.pluginsUrl + "city-picker/dist/css/city-picker.css"],
         'bootstrap-select': ["jquery", "bootstrap", 'css!' + Args.pluginsUrl + 'bootstrap-select/dist/css/bootstrap-select.min.css'],
         'bootstrap-select-lang': ['bootstrap-select'],
-        "epii-upload": ["jquery", "plupload", "css!model/css/epii.upload.css"],
+        "epii-upload": ["jquery", "plupload"],//, "css!model/css/epii.upload.css"
         "epii-upload-preview": ["epii-upload"],
         'qrcode': {
             exports: 'QRCode'

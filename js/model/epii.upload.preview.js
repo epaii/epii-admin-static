@@ -10,7 +10,7 @@ define(["epii-upload", "jquery"], function (epii_upload, $) {
         var add = Args.baseUrl + "../img/tubiao/upload_pc.jpg"
         var add_phone =  Args.baseUrl + "../img/tubiao/upload_phone.jpg"
         var pre_dom = $("<div class='epii-upload-preview-files'><div></div></div>");
-
+        
         var brower_dom = $("<div class='epii-upload-preview-btn'><div class='epii-upload-preview-add'><img src='" + add + "'><div class='epii-upload-preview-add-phone-title'>文件选择</div></div></div>");
         $(div).append(pre_dom);
         $(div).append(brower_dom);
@@ -24,10 +24,13 @@ define(["epii-upload", "jquery"], function (epii_upload, $) {
                 if(!data_mimetype) data_mimetype = "jpg,gif,png,jpeg,zip,rar,pdf";
                 phone_click.click(function () {
                     phone_click.hide();
+                    var qrcode_img =  phone_brower_dome[0].getElementsByClassName("epii-upload-phone-qrcode")[0];
                     phone_upload.getFiles( $.extend({
-                        qrcode_img: phone_brower_dome[0].getElementsByClassName("epii-upload-phone-qrcode")[0],
+                        qrcode_img:qrcode_img,
                         oninit:function(){
-                            phone_brower_dome.find(".epii-upload-phone-qrcode-div").show();
+                            setTimeout(() => {
+                                phone_brower_dome.find(".epii-upload-phone-qrcode-div").show();
+                            }, 500);
                         },
                         file_types:data_mimetype
                     },JSON.parse(Args.pluginsData.epii_upload_phone)),function(imgs){
