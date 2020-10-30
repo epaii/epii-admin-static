@@ -27,6 +27,7 @@ define(["plupload", "jquery", "epii-imgs-preview"], function (Plupload, $, file_
         var img_style = that.img_style;
 
         var inputObj = that.inputObj;
+        var urlInputObj = that.urlInputObj;
         if (inputObj) {
             var urlArr = [];
             if (that.multiple && inputObj.val() !== "") {
@@ -36,7 +37,14 @@ define(["plupload", "jquery", "epii-imgs-preview"], function (Plupload, $, file_
             inputObj.val(urlArr.join(",")).trigger("change");
         }
 
-
+        if (urlInputObj) {
+            var urlArr1 = [];
+            if (that.multiple && urlInputObj.val() !== "") {
+                urlArr1.push(urlInputObj.val());
+            }
+            urlArr1.push(response.url);
+            urlInputObj.val(urlArr1.join(",")).trigger("change");
+        }
 
         if (img_id && !that.multiple) {
             var img = $("#" + img_id);
@@ -209,18 +217,22 @@ define(["plupload", "jquery", "epii-imgs-preview"], function (Plupload, $, file_
         }
 
         var input_id = that_jq.data("input-id") ? that_jq.data("input-id") : "";
-
+        var url_input_id = that_jq.data("url-input-id") ? that_jq.data("url-input-id") : "";
+        var urlInputObj = null;
         var inputObj = null;
         if (input_id) {
             inputObj = $("#" + input_id);
         }
-
+       
+        if (url_input_id) {
+            urlInputObj = $("#" + url_input_id);
+        }
 
         that.imgs_ul_id_jquery = imgs_ul_id_jquery;
         that.multiple = multiple;
         that.img_style = img_style;
         that.inputObj = inputObj;
-
+        that.urlInputObj = urlInputObj;
         //default value
         showDefaultValues(that);
 
