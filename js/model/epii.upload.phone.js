@@ -37,15 +37,11 @@ define(["jquery"], function ($) {
 
                 options.oninit();
                
-                $(options.qrcode_img).attr("layer-index",0);
-                $(options.qrcode_img).click(function(){
+                setTimeout(() => {
                     window.top.layer.photos({
                         photos: options.qrcode_img, 
                     });
-                });
-               
-
-
+                }, 500);
                 client.regServer("onconnect", function (data, callback) {
                     if (has_connect) {
                         callback();
