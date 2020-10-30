@@ -1,4 +1,4 @@
- 
+
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as anonymous module.
@@ -12,69 +12,92 @@
     }
 })(function ($) {
 
-var out={
-    getFileIcon :function (file) {
-        var type = file.split('.');
-        var ext = type[type.length - 1];
-        var icon = "";
-        switch (ext) {
-            case "png":
-            case "jpeg":
-            case "gif":
-            case "jpg":
-                icon = file;
-                break;
-            case "zip":
-            case "pdf":
-            case "docx":
-            case "doc":
-            case "rar":
-                icon = Args.baseUrl + "../img/tubiao/" + ext + ".png"
-                break;
-            default:
-                icon = Args.baseUrl + "../img/tubiao/qita.png"
-                break;
+    var out = {
+        getFileExt: function (file) {
+            var type = file.split('.');
+            return type[type.length - 1];
+        },
+        isImg: function (file) {
 
-        }
-        return icon;
-    },
-    init:function (divs) {
-        divs.each(function () {
-            out.initOne(this)
-        });
-    },
-    initOne:function(dom){
-        var jdom = $(dom);
-        jdom.find("img").each(function(index){
-            $(this).attr("layer-index",index);
-            $(this).click(function(){
+            var ext = this.getFileExt(file);
+            return ["png", "gif", "jpeg", "jpg"].indexOf(ext) >= 0
+        },
+        isPdf: function (file) {
+            var ext = this.getFileExt(file);
+            return ext == "pdf"
+        },
+        getFileIcon: function (file) {
+            var ext = this.getFileExt(file)
+            var icon = "";
+            switch (ext) {
+                case "png":
+                case "jpeg":
+                case "gif":
+                case "jpg":
+                    icon = file;
+                    break;
+                case "zip":
+                case "pdf":
+                case "docx":
+                case "doc":
+                case "rar":
+                    icon = Args.baseUrl + "../img/tubiao/" + ext + ".png"
+                    break;
+                default:
+                    icon = Args.baseUrl + "../img/tubiao/qita.png"
+                    break;
+
+            }
+            return icon;
+        },
+        init: function (divs) {
+            divs.each(function () {
+                out.initOne(this)
+            });
+        },
+        initOne: function (dom) {
+            var jdom = $(dom);
+           
+            if (jdom.attr("data-files")) {
+                jdom.attr("data-files").split(",").forEach(function (item) {
+                    out.addFiles(jdom, item);
+                });
                 window.top.layer.photos({
                     photos: jdom,
                     closeBtn: 1,
-                    anim: 5 
+                    anim: 5,
+                    img:".epii-upload-file-icon-img"
                 });
-            })
-        });
-        if(jdom.attr("data-files")){
-            jdom.attr("data-files").split(",").forEach(function(item){
-                out.addFiles(jdom,item);
-            });
+            }else{
+                var find = jdom.attr("data-img") || "img"
+                window.top.layer.photos({
+                    photos: jdom,
+                    closeBtn: 1,
+                    anim: 5,
+                    img:find
+                });
+            }
+         
+        },
+        addFiles: function (imgs_ul_id_jquery, url) {
+
+            var name = url;
+            var icon = this.getFileIcon(name);
+
+            var isImg = this.isImg(url);
+
+            var file_div = $("<div class='epii-upload-files-div' ><img  data-file='"+url+"' class='epii-upload-file-icon " + (isImg ? ("epii-upload-file-icon-img'")  : "  '")  + " src='" + icon + "'  ></div>");
+
+            imgs_ul_id_jquery.append(file_div);
+            imgs_ul_id_jquery.show();
+            if(this.isPdf(url)){
+                file_div.click(function(){
+                   EpiiAdmin.openInDialog(url,"预览",true)
+                });
+            }else if(!isImg){
+                window.open(url,"_blank")
+            }
         }
-    },
-    addFiles:function(imgs_ul_id_jquery,url){
-        var name =url;
-        var icon = this.getFileIcon(name);     
-        var file_div = $("<div class='epii-upload-files-div' ><img class='epii-upload-file-icon' layer-index='" + imgs_ul_id_jquery.find(".epii-upload-files-div").length + "' src='" + icon + "' ></div>");
-        file_div.find(".epii-upload-file-icon").click(function () {
-            window.top.layer.photos({
-                photos: imgs_ul_id_jquery,
-                closeBtn: 1,
-                anim: 5 
-            });
-        });
-        imgs_ul_id_jquery.append(file_div);
-        imgs_ul_id_jquery.show();
-    }
-};
-return out;
+    };
+    return out;
 });
