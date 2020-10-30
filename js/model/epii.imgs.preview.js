@@ -57,7 +57,7 @@
         },
         initOne: function (dom) {
             var jdom = $(dom);
-           
+
             if (jdom.attr("data-files")) {
                 jdom.attr("data-files").split(",").forEach(function (item) {
                     out.addFiles(jdom, item);
@@ -66,18 +66,18 @@
                     photos: jdom,
                     closeBtn: 1,
                     anim: 5,
-                    img:".epii-upload-file-icon-img"
+                    img: ".epii-upload-file-icon-img"
                 });
-            }else{
+            } else {
                 var find = jdom.attr("data-img") || "img"
                 window.top.layer.photos({
                     photos: jdom,
                     closeBtn: 1,
                     anim: 5,
-                    img:find
+                    img: find
                 });
             }
-         
+
         },
         addFiles: function (imgs_ul_id_jquery, url) {
 
@@ -86,16 +86,19 @@
 
             var isImg = this.isImg(url);
 
-            var file_div = $("<div class='epii-upload-files-div' ><img  data-file='"+url+"' class='epii-upload-file-icon " + (isImg ? ("epii-upload-file-icon-img'")  : "  '")  + " src='" + icon + "'  ></div>");
+            var file_div = $("<div class='epii-upload-files-div' ><img  data-file='" + url + "' class='epii-upload-file-icon " + (isImg ? ("epii-upload-file-icon-img'") : "  '") + " src='" + icon + "'  ></div>");
 
             imgs_ul_id_jquery.append(file_div);
             imgs_ul_id_jquery.show();
-            if(this.isPdf(url)){
-                file_div.click(function(){
-                   EpiiAdmin.openInDialog(url,"预览",true)
+            if (this.isPdf(url)) {
+                file_div.click(function () {
+                    EpiiAdmin.openInDialog(url, "预览", true)
                 });
-            }else if(!isImg){
-                window.open(url,"_blank")
+            } else if (!isImg) {
+                
+                file_div.click(function () {
+                    window.open(url, "_blank")
+                });
             }
         }
     };
