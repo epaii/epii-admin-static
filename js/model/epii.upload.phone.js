@@ -54,10 +54,11 @@ define(["jquery"], function ($) {
 
 
                     var imgs = [];
-                    var urls = data.data.files.split(",");
-                    urls.forEach(value => {
+                    var paths = data.data.files.split(",");
+                    var urls = data.data.urls.split(",");
+                    paths.forEach( (value,index) => {
                         imgs.push({
-                            url: options.file_pre + value,
+                            url: urls[index],
                             path: value
                         })
                     });

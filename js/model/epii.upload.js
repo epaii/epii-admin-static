@@ -65,7 +65,7 @@ define(["plupload", "jquery", "epii-imgs-preview"], function (Plupload, $, file_
             //var close = $("<img  class='epii-upload-file-close'  src='" + del + "'  >");
             var close = $('<a  class="epii-upload-file-close" href="javascript:;"></a>');
             close.click(
-                (function (input, val) {
+                (function (input, val,urlInputObj,url) {
                     return function () {
 
                         if (input) {
@@ -74,10 +74,16 @@ define(["plupload", "jquery", "epii-imgs-preview"], function (Plupload, $, file_
 
                             input.val(val_real).trigger("change");
                         }
+                        if(urlInputObj){
+                            var val_real1 = urlInputObj.val() + ",";
+                            val_real1 = val_real1.replace(url + ",", "").replace(/,$/g, '');
+
+                            urlInputObj.val(val_real1).trigger("change");
+                        }
                         $(this).parent().remove();
                     };
 
-                })(inputObj, response.path)
+                })(inputObj, response.path,urlInputObj,response.url)
             );
             close.hide();
             file_div.append(close);
