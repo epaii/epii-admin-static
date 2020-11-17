@@ -43,6 +43,13 @@
                 case "rar":
                     icon = Args.baseUrl + "../img/tubiao/" + ext + ".png"
                     break;
+                case "ppt":
+                    icon = Args.baseUrl + "../img/tubiao/" + ext + ".jpg" 
+                    break;
+               case "xls":
+               case "xlsx":
+                     icon = Args.baseUrl + "../img/tubiao/xls.jpg" 
+                     break;
                 default:
                     icon = Args.baseUrl + "../img/tubiao/qita.png"
                     break;
