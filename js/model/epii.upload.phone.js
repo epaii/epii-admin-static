@@ -32,7 +32,8 @@ define(["jquery"], function ($) {
                 var qrcode = new QRCode(options.qrcode_img, {
                     text:text,
                     width: 400,
-                    height: 400
+                    height: 400,
+                    correctLevel: 3
                 });
 
                 options.oninit();
