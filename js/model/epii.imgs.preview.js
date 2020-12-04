@@ -59,16 +59,18 @@
         },
         init: function (divs) {
             divs.each(function () {
+              
                 out.initOne(this)
             });
         },
         initOne: function (dom) {
             var jdom = $(dom);
-
+            var onitem_click = jdom.attr("data-on-item-click");
             if (jdom.attr("data-files")) {
-                jdom.attr("data-files").split(",").forEach(function (item) {
-                    out.addFiles(jdom, item);
+                jdom.attr("data-files").split(",").forEach(function (item,index) {
+                    out.addFiles(jdom, item,index,onitem_click);
                 });
+                if(!onitem_click)
                 window.top.layer.photos({
                     photos: jdom,
                     closeBtn: 1,
@@ -86,7 +88,7 @@
             }
 
         },
-        addFiles: function (imgs_ul_id_jquery, url) {
+        addFiles: function (imgs_ul_id_jquery, url,index,onitem_click) {
 
             var name = url;
             var icon = this.getFileIcon(name);
@@ -97,16 +99,26 @@
 
             imgs_ul_id_jquery.append(file_div);
             imgs_ul_id_jquery.show();
-            if (this.isPdf(url)) {
+
+            if(onitem_click){
                 file_div.click(function () {
-                    EpiiAdmin.openInDialog(url, "预览", true)
+                    eval(onitem_click+"(file_div,url,index,imgs_ul_id_jquery)")
                 });
-            } else if (!isImg) {
                 
-                file_div.click(function () {
-                    window.open(url, "_blank")
-                });
+            }else{
+                if (this.isPdf(url)) {
+                    file_div.click(function () {
+                        EpiiAdmin.openInDialog(url, "预览", true)
+                    });
+                } else if (!isImg) {
+                    
+                    file_div.click(function () {
+                        window.open(url, "_blank")
+                    });
+                }
             }
+
+          
         }
     };
     return out;
