@@ -119,20 +119,28 @@ function require_run() {
     require(["epiiadminJs", "args"], function (admin, Args) {
 
 
-        var initfunctions;
-        if (initfunctions = window[Args.epiiInitFunctionsName]) {
-            initfunctions.forEach(function (call) {
-                call.call(null, Args);
-            });
+        function initfuction(){
+            var initfunctions;
+            if (initfunctions = window[Args.epiiInitFunctionsName]) {
+                initfunctions.forEach(function (call) {
+                    call.call(null, Args);
+                });
+            }
         }
+      
 
         function apprun() {
             if (Args.appName) {
                 require([Args.appUrl + Args.appName + (Args.appUrl.indexOf("http") === 0 ? ".js" : "")], function (app) {
+                    window.$app=app;
+                    window.$this=app;
                     if (app && app.hasOwnProperty("run")) {
                         app.run(Args);
                     }
+                    initfuction();
                 })
+            }else{
+                initfuction();
             }
         }
 
