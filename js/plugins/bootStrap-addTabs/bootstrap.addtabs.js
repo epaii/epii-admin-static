@@ -516,7 +516,9 @@
         tab_content.find('#' + id).find('#tabCover').remove();
 
     };
-
+    $.addtabs.closeCurrent = function(){
+        $.addtabs.close({id:$.addtabs.current_id});
+    }
     $.addtabs.close = function (opts) {
         //如果关闭的是当前激活的TAB，激活他的前一个TAB
         if ($("#tab_" + opts.id).hasClass('active')) {
