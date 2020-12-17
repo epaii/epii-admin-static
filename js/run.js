@@ -132,6 +132,7 @@ function require_run() {
         function apprun() {
             if (Args.appName) {
                 require([Args.appUrl + Args.appName + (Args.appUrl.indexOf("http") === 0 ? ".js" : "")], function (app) {
+                    console.log(app);
                     window.$app=app;
                     window.$this=app;
                     if (app && app.hasOwnProperty("run")) {
