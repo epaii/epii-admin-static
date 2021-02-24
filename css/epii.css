@@ -201,7 +201,7 @@
     overflow: auto;
     border: 0.5px solid #dcdcdc;
     margin-top: 10px;
-    padding: 0px 25px;
+    padding: 0px 15px;
     width: 98%;
     margin: 0px auto;
     border-radius: 2px;
@@ -210,8 +210,8 @@
 .epii-upload-preview-btn{
     border: 1px dashed #8c939d;
     float: left;
-    width: 200px;
-    height: 240px;
+    width: 150px;
+    height: 270px;
     margin: 30px 10px;
     border-radius: 10px;
     text-align: center;
@@ -226,8 +226,8 @@
 .epii-upload-file-icon {
     padding: 5px;
     border-radius: 10px;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     border: 0.5px solid #dcdcdc;
   }
 
@@ -235,8 +235,8 @@
   .epii-upload-preview-btn-phone {
     border: 1px dashed #8c939d;
     float: left;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     margin: 10px 5px;
     border-radius: 10px;
     text-align: center;
