@@ -95,7 +95,7 @@
 
             var isImg = this.isImg(url);
 
-            var file_div = $("<div class='epii-upload-files-div' ><img  data-file='" + url + "' class='epii-upload-file-icon " + (isImg ? ("epii-upload-file-icon-img'") : "  '") + " src='" + icon + "'  ></div>");
+            var file_div = $("<div class='epii-upload-files-div' ><div class='epii-upload-file-icon'><img  data-file='" + url + "' class='" + (isImg ? ("epii-upload-file-icon-img'") : "  '") + " src='" + icon + "'  ></div></div>");
 
             imgs_ul_id_jquery.append(file_div);
             imgs_ul_id_jquery.show();

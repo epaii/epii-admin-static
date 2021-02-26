@@ -59,7 +59,7 @@ define(["plupload", "jquery", "epii-imgs-preview"], function (Plupload, $, file_
             var icon = file_preview.getFileIcon(name);
             var isImg = file_preview.isImg(response.url);
 
-            var file_div = $("<div class='epii-upload-files-div' ><img  data-file='" + response.url + "' class='epii-upload-file-icon " + (isImg ? ("epii-upload-file-icon-img'") : "  '") + " src='" + icon + "'  ></div>");
+            var file_div = $("<div class='epii-upload-files-div' ><div class='epii-upload-file-icon'><img  data-file='" + response.url + "' class='" + (isImg ? ("epii-upload-file-icon-img'") : "  '") + " src='" + icon + "'  ></div></div>");
 
 
             //var close = $("<img  class='epii-upload-file-close'  src='" + del + "'  >");
