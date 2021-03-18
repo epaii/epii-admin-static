@@ -293,7 +293,13 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
         this.tagAttr += " target='_blank' ";
         return formatter.btn.apply(this, arguments);
     };
-  
+    formatter.img =function (value, row, index, field) {
+        
+        return formatter.btn.apply(this, arguments);
+    };
+    formatter.imgs =function (value, row, index, field) {
+        return formatter.btn.apply(this, arguments);
+    };
     out.formatter = out.epiiFormatter = formatter;
     window.epiiFormatter = formatter;
     window.epii_table = out;
