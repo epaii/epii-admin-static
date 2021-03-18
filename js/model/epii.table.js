@@ -1,6 +1,9 @@
 /**
  * Created by mrren on 2018/6/30.
  */
+
+
+
 define(['bootstrap-table', "jquery"], function (bTable, $) {
 
 
@@ -15,6 +18,8 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
         }
         return (tableid && tableid != "1") ? $("#" + tableid) : defualt_table;
     }
+
+
 
     function out(tables) {
 
@@ -270,6 +275,7 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
     };
     formatter.a.dialog = btn.dialog = function (value, row, index, field) {
         this.tagClass += " btn-dialog";
+        this.tagAttr += " data-area='"+(this.area ? this.area : "100%,100%")+"'";
         return formatter.btn.apply(this, arguments);
     };
     formatter.a._blank = btn._blank = function (value, row, index, field) {
@@ -281,25 +287,44 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
     formatter.url = formatter.a;
 
     formatter.time =function (value, row, index, field) {
-        this.tagAttr += " target='_blank' ";
-        return formatter.btn.apply(this, arguments);
+
+        return  this.timeFormat?dateFormat(value,this.timeFormat):dateFormat(value);
+    };
+    formatter.time.year =function (value, row, index, field) {
+        return  dateFormat(value,'yyyy')+'年';
     };
     formatter.time.day =function (value, row, index, field) {
-        this.tagAttr += " target='_blank' ";
-        return formatter.btn.apply(this, arguments);
+        return  dateFormat(value,'yyyy-mm-dd');
     };
+
     formatter.time.d = formatter.time.day;
-    formatter.time.s =function (value, row, index, field) {
-        this.tagAttr += " target='_blank' ";
-        return formatter.btn.apply(this, arguments);
+    formatter.time.y= formatter.time.year;
+    formatter.time.i =function (value, row, index, field) {
+        return  dateFormat(value,'yyyy-mm-dd hh:ii');
+    };
+    formatter.time.h =function (value, row, index, field) {
+
+        return  dateFormat(value,'yyyy-mm-dd hh');
     };
     formatter.img =function (value, row, index, field) {
-        
-        return formatter.btn.apply(this, arguments);
+            value=value.split(',')[0];
+        return   "<a class=\"btn btn-danger btn-dialog\"   title=\"点击查看图片\"  data-area=\"60%,60%\" data-url=\""+value+"\"><img src='"+value+"' style='width:60px;height: 60px;'/></a>";
     };
     formatter.imgs =function (value, row, index, field) {
-        return formatter.btn.apply(this, arguments);
+        var valObj=value.split(',');
+        var count=valObj.length;
+        var size=60;
+        var  h_w=size/count*1.;
+        var  margin=size/count/5;
+        var _html='';
+        for(var i=0;i<count;i++){
+            var img_val=valObj[i];
+            _html+="<a class=\"btn btn-danger btn-dialog\"  style='margin: "+margin+"px' title=\"点击查看图片\"  data-area=\"60%,60%\" data-url=\""+img_val+"\"><img src='"+img_val+"' style='width:"+h_w+"px;height: "+h_w+"px;'/></a>"
+        }
+        return _html;
     };
+
+
     out.formatter = out.epiiFormatter = formatter;
     window.epiiFormatter = formatter;
     window.epii_table = out;
@@ -307,3 +332,24 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
     return out;
 
 });
+
+
+function dateFormat(date,fmt){
+    date=new Date(date*1000);
+    fmt=fmt?fmt.toLowerCase():'yyyy-mm-dd hh:ii:ss';
+    var o = {
+        "y+":date.getFullYear(),                    //年
+        "m+" : date.getMonth()+1,                 //月份
+        "d+" : date.getDate(),                    //日
+        "h+" : date.getHours(),                   //小时
+        "i+" : date.getMinutes(),                 //分
+        "s+" : date.getSeconds(),                 //秒
+    };
+    if(/(y+)/.test(fmt)){
+        fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));
+    }
+    for(var k in o)
+        if(new RegExp("("+ k +")").test(fmt))
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+    return fmt;
+}
