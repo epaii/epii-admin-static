@@ -280,6 +280,20 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
     formatter.btn = btn;
     formatter.url = formatter.a;
 
+    formatter.time =function (value, row, index, field) {
+        this.tagAttr += " target='_blank' ";
+        return formatter.btn.apply(this, arguments);
+    };
+    formatter.time.day =function (value, row, index, field) {
+        this.tagAttr += " target='_blank' ";
+        return formatter.btn.apply(this, arguments);
+    };
+    formatter.time.d = formatter.time.day;
+    formatter.time.s =function (value, row, index, field) {
+        this.tagAttr += " target='_blank' ";
+        return formatter.btn.apply(this, arguments);
+    };
+  
     out.formatter = out.epiiFormatter = formatter;
     window.epiiFormatter = formatter;
     window.epii_table = out;
