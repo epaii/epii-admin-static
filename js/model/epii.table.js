@@ -312,7 +312,7 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
     };
     formatter.time.i =function (value, row, index, field) {
 
-        return  dateFormat(value,'y年m月d日 h时i分');
+        return  dateFormat(value,'y-m-d h:i');
     };
     formatter.time.s =function (value, row, index, field) {
         return  dateFormat(value,'y-m-d h:i:s');
