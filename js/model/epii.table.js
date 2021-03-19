@@ -129,6 +129,8 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
 
     function formatter(value, row, index, field) {
 
+        arguments[0]= value?value:EpiiAdmin.tools.replaceInData(this.field,row);
+
         return jqueryObject.apply(this, arguments).prop("outerHTML");
 
 
@@ -159,6 +161,7 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
             if (bgcolorstyle = row[filedName(field, "bgColor")]) {
                 tagstyle += "; background-color:" + EpiiAdmin.tools.replaceInData(bgcolorstyle, row) + ";"
             }
+
             var value = $('<' + tagname + '   class="text-align:center' + tagclass + '" style="' + tagstyle + '"  ' + tagattr + '>' + obj + '</' + tagname + '>');
             var filed_class, filed_style, fileld_attr;
             if (filed_class = row[filedName(field, "class")]) {
@@ -327,12 +330,15 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
         return _html;
     };
     formatter.eval =function (value, row, index, field) {
+
+        return  EpiiAdmin.tools.replaceInData(field, row)
        /* for(k in field){
             if(new RegExp("("+ k +")").test(fmt))
         }*/
-        console.log(row);
 
-        console.log(field);
+
+
+
     };
 
     out.formatter = out.epiiFormatter = formatter;
