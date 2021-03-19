@@ -329,18 +329,6 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
         }
         return _html;
     };
-    formatter.eval =function (value, row, index, field) {
-
-        return  EpiiAdmin.tools.replaceInData(field, row)
-       /* for(k in field){
-            if(new RegExp("("+ k +")").test(fmt))
-        }*/
-
-
-
-
-    };
-
     out.formatter = out.epiiFormatter = formatter;
     window.epiiFormatter = formatter;
     window.epii_table = out;
