@@ -308,11 +308,11 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
     };
     formatter.time.d = formatter.time.day;
     formatter.time.h =function (value, row, index, field) {
-        return  dateFormat(value,'y-m-d h时');
+        return  dateFormat(value,'y年m月d日 h时');
     };
     formatter.time.i =function (value, row, index, field) {
 
-        return  dateFormat(value,'y-m-d h时i分');
+        return  dateFormat(value,'y年m月d日 h时i分');
     };
     formatter.time.s =function (value, row, index, field) {
         return  dateFormat(value,'y-m-d h:i:s');
