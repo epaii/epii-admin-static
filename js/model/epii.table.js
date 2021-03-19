@@ -294,7 +294,7 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
 
     formatter.time =function (value, row, index, field) {
 
-        return  this.timeFormat?dateFormat(value,this.timeFormat):dateFormat(value);
+        return  this.timeFormat?dateFormat(value,this.timeFormat):dateFormat(value,'y-m-d');
     };
     formatter.time.year =function (value, row, index, field) {
         return  dateFormat(value,'yyyy')+'年';
@@ -308,15 +308,23 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
     formatter.time.i =function (value, row, index, field) {
         return  dateFormat(value,'y-m-d h:i');
     };
+    formatter.time.m =function (value, row, index, field) {
+        return  dateFormat(value,'y年m月');
+    };
     formatter.time.h =function (value, row, index, field) {
 
-        return  dateFormat(value,'y-m-d h');
+        return  dateFormat(value,'y-m-d h时');
+    };
+    formatter.time.i =function (value, row, index, field) {
+
+        return  dateFormat(value,'y-m-d h时i分');
     };
     formatter.img =function (value, row, index, field) {
             value=value.split(',')[0];
-        return   "<a class=\"btn btn-danger btn-dialog\"   title=\"点击查看图片\"  data-area=\"60%,60%\" data-url=\""+value+"\"><img src='"+value+"' style='width:60px;height: 60px;'/></a>";
+        return   "<a class=\"btn  btn-dialog\"   title=\"点击查看图片\"  data-area=\"60%,60%\" data-url=\""+value+"\"><img src='"+value+"' style='width:60px;height: 60px;'/></a>";
     };
     formatter.imgs =function (value, row, index, field) {
+        value=value.replace(';',',')
         var valObj=value.split(',');
         var count=valObj.length;
         var size=60;
@@ -325,7 +333,7 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
         var _html='';
         for(var i=0;i<count;i++){
             var img_val=valObj[i];
-            _html+="<a class=\"btn btn-danger btn-dialog\"  style='margin: "+margin+"px' title=\"点击查看图片\"  data-area=\"60%,60%\" data-url=\""+img_val+"\"><img src='"+img_val+"' style='width:"+h_w+"px;height: "+h_w+"px;'/></a>"
+            _html+="<a class=\"btn  btn-dialog\"  style='margin: "+margin+"px' title=\"点击查看图片\"  data-area=\"60%,60%\" data-url=\""+img_val+"\"><img src='"+img_val+"' style='width:"+h_w+"px;height: "+h_w+"px;'/></a>"
         }
         return _html;
     };
