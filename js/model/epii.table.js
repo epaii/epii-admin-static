@@ -302,22 +302,20 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
     formatter.time.day =function (value, row, index, field) {
         return  dateFormat(value,'y-m-d');
     };
-
-    formatter.time.d = formatter.time.day;
     formatter.time.y= formatter.time.year;
-    formatter.time.i =function (value, row, index, field) {
-        return  dateFormat(value,'y-m-d h:i');
-    };
     formatter.time.m =function (value, row, index, field) {
         return  dateFormat(value,'y年m月');
     };
+    formatter.time.d = formatter.time.day;
     formatter.time.h =function (value, row, index, field) {
-
         return  dateFormat(value,'y-m-d h时');
     };
     formatter.time.i =function (value, row, index, field) {
 
         return  dateFormat(value,'y-m-d h时i分');
+    };
+    formatter.time.s =function (value, row, index, field) {
+        return  dateFormat(value,'y-m-d h:i:s');
     };
     formatter.img =function (value, row, index, field) {
             value=value.split(',')[0];
