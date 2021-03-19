@@ -226,6 +226,7 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
 
 
     };
+    formatter.status =  formatter.switch ; 
 
     formatter.btns = function (value, row, index, field) {
         var btns_args = arguments;

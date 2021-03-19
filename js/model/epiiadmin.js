@@ -455,6 +455,8 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
 //auto form
     epiiAdmin.bindWindow(this_window_id);
  
+
+    
     var forms, tables, citys, selects, input_search, imgs_previews;
     if ((forms = $("form[data-form=1]")) && forms.length > 0) {
         require(['form'], function (Form) {
