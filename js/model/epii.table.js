@@ -135,7 +135,9 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
     }
 
     var jqueryObject = function (obj, row, index, field) {
+
         if (obj instanceof jQuery) {
+
             return obj;
         } else {
             var phptagname = row[filedName(field, "name")];
@@ -179,6 +181,7 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
 
 
             return value;
+
         }
     };
 
@@ -294,17 +297,17 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
         return  dateFormat(value,'yyyy')+'年';
     };
     formatter.time.day =function (value, row, index, field) {
-        return  dateFormat(value,'yyyy-mm-dd');
+        return  dateFormat(value,'y-m-d');
     };
 
     formatter.time.d = formatter.time.day;
     formatter.time.y= formatter.time.year;
     formatter.time.i =function (value, row, index, field) {
-        return  dateFormat(value,'yyyy-mm-dd hh:ii');
+        return  dateFormat(value,'y-m-d h:i');
     };
     formatter.time.h =function (value, row, index, field) {
 
-        return  dateFormat(value,'yyyy-mm-dd hh');
+        return  dateFormat(value,'y-m-d h');
     };
     formatter.img =function (value, row, index, field) {
             value=value.split(',')[0];
@@ -323,7 +326,14 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
         }
         return _html;
     };
+    formatter.eval =function (value, row, index, field) {
+       /* for(k in field){
+            if(new RegExp("("+ k +")").test(fmt))
+        }*/
+        console.log(row);
 
+        console.log(field);
+    };
 
     out.formatter = out.epiiFormatter = formatter;
     window.epiiFormatter = formatter;
@@ -345,11 +355,9 @@ function dateFormat(date,fmt){
         "i+" : date.getMinutes(),                 //分
         "s+" : date.getSeconds(),                 //秒
     };
-    if(/(y+)/.test(fmt)){
-        fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));
-    }
+
     for(var k in o)
         if(new RegExp("("+ k +")").test(fmt))
-            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+            fmt = fmt.replace(RegExp.$1, (k==='y+') ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
     return fmt;
 }
