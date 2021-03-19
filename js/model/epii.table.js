@@ -210,22 +210,42 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
 
     };
 
+
+
+    formatter.__changeSwitch = function(url)
+    {
+        EpiiAdmin.confirm("确定要修改吗？",function(){
+            EpiiAdmin.ajax(url);
+        });
+
+    }
+
     formatter.switch = function (value, row, index, field) {
 
-
-        if ((!value) || (value - 0 === 0)) {
-            value = "<i class=\"fa fa-toggle-off\" aria-hidden=\"true\" style='color: red;font-size: 30px' ></i>";
+        var witch_value=field?field:'switch_value';
+        var  url = this.onChangeUrl?EpiiAdmin.tools.replaceInData(this.onChangeUrl, row):"";
+        if(url.indexOf("?")>=0)
+        {
+            url = url+"&"+witch_value+"="+(1-value);
+        }else{
+            url = url+"?"+witch_value+"="+(1-value);
+        }
+        var onclickstr=this.onChangeUrl?"onclick='window.epiiFormatter.__changeSwitch(\""+url+"\")'":'';
+        if (value - 0 === 0) {
+            value = "<i class=\"fa fa-toggle-off\" aria-hidden=\"true\" "+onclickstr+" style='color: red;font-size: 30px' ></i>";
         } else {
-            value = "<i class=\"fa fa-toggle-on\" aria-hidden=\"true\" style='color: green;font-size: 30px'></i>";
+            value = "<i class=\"fa fa-toggle-on\" aria-hidden=\"true\" "+onclickstr+"  style='color: green;font-size: 30px'></i>";
         }
 
         arguments[0] = value;
-
+        console.log(this);
 
         return formatter.apply(this, arguments);
 
 
     };
+
+
     formatter.status =  formatter.switch ; 
 
     formatter.btns = function (value, row, index, field) {
@@ -362,3 +382,5 @@ function dateFormat(date,fmt){
             fmt = fmt.replace(RegExp.$1, (k==='y+') ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
     return fmt;
 }
+
+
