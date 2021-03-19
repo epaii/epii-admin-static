@@ -213,8 +213,8 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
     formatter.switch = function (value, row, index, field) {
 
 
-        if (value - 0 === 0) {
-            value = "<i class=\"fa fa-toggle-off\" aria-hidden=\"true\" style='color: red;font-size: 30px'></i>";
+        if ((!value) || (value - 0 === 0)) {
+            value = "<i class=\"fa fa-toggle-off\" aria-hidden=\"true\" style='color: red;font-size: 30px' ></i>";
         } else {
             value = "<i class=\"fa fa-toggle-on\" aria-hidden=\"true\" style='color: green;font-size: 30px'></i>";
         }
