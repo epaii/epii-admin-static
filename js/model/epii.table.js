@@ -129,7 +129,7 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
 
     function formatter(value, row, index, field) {
 
-        arguments[0]= value?value:EpiiAdmin.tools.replaceInData(this.field,row);
+        arguments[0]= typeof(value) === 'undefined'?EpiiAdmin.tools.replaceInData(this.field,row):value;
 
         return jqueryObject.apply(this, arguments).prop("outerHTML");
 
