@@ -25,8 +25,9 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
 
         tables.each(function () {
             if (defualt_table === null) defualt_table = $(this);
-
+            var on_load_success = $(this).data("on-load-success");
             $(this).bootstrapTable({
+                jdom:$(this),
                 method: 'POST',
                 dataType: 'json',
                 contentType: "application/x-www-form-urlencoded",
@@ -36,8 +37,11 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
                 pagination: true,
                 sidePagination: EpiiAdmin.getTrueValue($(this).data("side-pagination"), "server"),
                 pageSize: EpiiAdmin.getTrueValue($(this).data("page-size"), 30),
-                onLoadSuccess: function () {
-
+                onLoadSuccess: function (data) {
+                  if(on_load_success && window[on_load_success])
+                  {
+                     window[on_load_success].call(this,data)  
+                  }
                 },
                 onResetView: function () {
                     if ((this.totalRows - 0 > 0) && (window.changeThisIframeHeight)) {
@@ -238,7 +242,7 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
         }
 
         arguments[0] = value;
-        console.log(this);
+      
 
         return formatter.apply(this, arguments);
 
