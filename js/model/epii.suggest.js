@@ -40,7 +40,7 @@
             jThat.after('<div class="input-group-btn"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button><ul class="dropdown-menu dropdown-menu-right" role="menu"></ul></div>');
             var idField = EpiiAdmin.getTrueValue(data['idField'], "id");
             jThat.bsSuggest({
-                allowNoKeyword: false, //是否允许无关键字时请求数据。为 false 则无输入时不执行过滤请求
+                allowNoKeyword: true, //是否允许无关键字时请求数据。为 false 则无输入时不执行过滤请求
                 multiWord: true, //以分隔符号分割的多关键字支持
                 separator: ",", //多关键字支持时的分隔符，默认为空格
                 getDataMethod: "url", //获取数据的方式，总是从 URL 获取
@@ -61,6 +61,8 @@
             }).on('onDataRequestSuccess', function (e, result) {
                 // console.log('onDataRequestSuccess: ', result);
             }).on('onSetSelectValue', function (e, keyword, data) {
+              
+              jThat.val(EpiiAdmin.getTrueValue(data.text,data.name,data.value));
 
                 jThat.attr("data-last-select-value", e.target.value);
                 var inputs = [];
