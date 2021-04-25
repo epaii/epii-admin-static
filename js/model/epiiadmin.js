@@ -482,7 +482,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
             epiiselect.init(selects);
         });
     }
-    if ((input_search = $('[data-input-search="1"]')) && selects.length > 0) {
+    if ((input_search = $('[data-search="1"]')) && input_search.length > 0) {
         require(['input-search'], function (epii_search) {
 
             epii_search.init(input_search);
