@@ -51,8 +51,9 @@
                 keyField: EpiiAdmin.getTrueValue(data['keyField'], "text"),
                 // url 获取数据时，对数据的处理，作为 fnGetData 的回调函数
                 fnProcessData: function (json) {
+                     
                     return {
-                        value: json
+                        value: EpiiAdmin.getTrueValue(json.data ?json.data.list:null,json.data,json)
                     };
                 },
                 effectiveFields: effectiveFields,
