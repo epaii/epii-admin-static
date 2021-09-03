@@ -200,6 +200,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
 
             options = typeof options === 'string' ? {url: options} : options;
             var index = layer.load(0, {shade: 0.4});
+           // onOk = epiiAdmin.tools.getFunction(onOk, data, "onOk");
             options = $.extend({
                 type: "POST",
                 dataType: "json",
@@ -318,10 +319,10 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
                 var title = data['title'] ? data['title'] : ($a.attr("title") ? $a.attr("title") : null);
 
                 while (true) {
-                    console.log(data);
+                     
                     if (onok && data['ajax']) {
-                        console.log("ajax");
-                        epiiAdmin.ajax(epiiAdmin.tools.getUrlInTagA(dom));
+                         
+                        epiiAdmin.ajax(epiiAdmin.tools.getUrlInTagA(dom),data['onAjaxSuccess']?data['onAjaxSuccess']:null);
                     } else if (onok && data['addtab']) {
                         epiiAdmin.openInTab(epiiAdmin.tools.getUrlInTagA(dom), title, data['addtab']);
                     } else if (onok && data['dialog']) {
