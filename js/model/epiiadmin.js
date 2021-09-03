@@ -144,7 +144,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
             var index = mylayer.open({
                 type: 2,
                 title: title,
-                shadeClose: true,
+                shadeClose: false,
                 shade: 0.5,
                 area: !area ? ['100%', '100%'] : area.split(","),
                 content: url,
@@ -162,12 +162,19 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
                 },
                 cancel: function (index, layero) {
 
+                    var openwindow = $(layero).find("iframe")[0].contentWindow;
 
-                    var close_wind_id = this.close_wind_id;
-
-
-                    this.mylayer.close(index);
-                    epiiAdmin.whenWindowClose(close_wind_id);
+                    function thisClose(){
+                        var close_wind_id = this.close_wind_id;
+                        this.mylayer.close(index);
+                        epiiAdmin.whenWindowClose(close_wind_id);
+                    }
+                    if(openwindow.onLayerClose){
+                        openwindow.onLayerClose(thisClose);
+                    }else{
+                        thisClose();
+                    }
+                    
 
                     return false;
                 }
