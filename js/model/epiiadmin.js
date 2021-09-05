@@ -164,9 +164,10 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
 
                     var openwindow = $(layero).find("iframe")[0].contentWindow;
 
+                    var that = this;
                     function thisClose(){
-                        var close_wind_id = this.close_wind_id;
-                        this.mylayer.close(index);
+                        var close_wind_id = that.close_wind_id;
+                        that.mylayer.close(index);
                         epiiAdmin.whenWindowClose(close_wind_id);
                     }
                     if(openwindow.onLayerClose){
