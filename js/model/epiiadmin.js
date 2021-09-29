@@ -182,7 +182,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
                             if(openwindow.onLayerClose){
                                 openwindow.onLayerClose(thisClose);
                             }  
-                        } catch  {
+                        } catch(r) {
                             thisClose();
                         }
                     }

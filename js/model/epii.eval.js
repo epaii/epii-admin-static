@@ -121,7 +121,11 @@
             }
             if (this.functions) {
                 this.functions.forEach(function (fun) {
-                    if (getWindow()[fun[0]]) getWindow()[fun[0]].apply(null, fun[1]);
+
+                    if (getWindow()[fun[0]]) getWindow()[fun[0]].apply(null,fun[1]);
+                    console.log('---------------------');
+                    console.log('sssssssssss');
+                    console.log('---------------------');
                 });
             }
         }
