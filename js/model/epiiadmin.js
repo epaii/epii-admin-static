@@ -168,7 +168,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
                 },
                 cancel: function (index, layero) {
 
-                    var openwindow = $(layero).find("iframe")[0].contentWindow;
+                   
 
                     var that = this;
                     var close_wind_id = that.close_wind_id;
@@ -176,6 +176,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
                     if (close_wind_id == -1) {
                         that.mylayer.close(index);
                     } else {
+                        var openwindow = $(layero).find("iframe")[0].contentWindow;
                         function thisClose() {
                             that.mylayer.close(index);
                         }
