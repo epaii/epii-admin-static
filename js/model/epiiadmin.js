@@ -153,7 +153,13 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
                 offset: offset,
                 success: function (layero, index) {
                     var openwindow = $(layero).find("iframe")[0].contentWindow;
-                    var close_wind_id = openwindow.Args.window_id;
+                    var close_wind_id = -1;
+                    try {
+                        close_wind_id =   openwindow.Args.window_id;
+                    } catch (error) {
+                        
+                    }
+                    
                     openwindow.open_layer = mylayer;
                     openwindow.open_layer_index = index;
                     openwindow.open_in_window = epiiAdmin.this_window;
@@ -165,18 +171,23 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
                     var openwindow = $(layero).find("iframe")[0].contentWindow;
 
                     var that = this;
-                    function thisClose(){
-                        var close_wind_id = that.close_wind_id;
+                    var close_wind_id = that.close_wind_id;
+                    if(close_wind_id==-1){
                         that.mylayer.close(index);
-                        epiiAdmin.whenWindowClose(close_wind_id);
-                    }
-                    if(openwindow.onLayerClose){
-                        openwindow.onLayerClose(thisClose);
                     }else{
-                        thisClose();
+                        function thisClose(){
+                            that.mylayer.close(index);
+                        }
+                        try {
+                            if(openwindow.onLayerClose){
+                                openwindow.onLayerClose(thisClose);
+                            }  
+                        } catch  {
+                            thisClose();
+                        }
                     }
                     
-
+     
                     return false;
                 }
 
