@@ -156,13 +156,13 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
                     var close_wind_id = -1;
                     try {
                         close_wind_id = openwindow.Args.window_id;
+                        openwindow.open_layer = mylayer;
+                        openwindow.open_layer_index = index;
+                        openwindow.open_in_window = epiiAdmin.this_window;
                     } catch (error) {
 
                     }
 
-                    openwindow.open_layer = mylayer;
-                    openwindow.open_layer_index = index;
-                    openwindow.open_in_window = epiiAdmin.this_window;
                     this.close_wind_id = close_wind_id;
 
                 },
