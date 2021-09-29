@@ -172,6 +172,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
 
                     var that = this;
                     var close_wind_id = that.close_wind_id;
+
                     if(close_wind_id==-1){
                         that.mylayer.close(index);
                     }else{
@@ -181,8 +182,11 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
                         try {
                             if(openwindow.onLayerClose){
                                 openwindow.onLayerClose(thisClose);
-                            }  
-                        } catch(r) {
+                            }  else{
+                                thisClose();
+                            }
+                        } catch (e) {
+
                             thisClose();
                         }
                     }
