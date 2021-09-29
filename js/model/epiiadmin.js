@@ -45,7 +45,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
         };
 
         epiiAdmin.bindWindow(this_window_id, window);
- 
+
         epiiAdmin.getTrueValue = function () {
             for (var i = 0; i < arguments.length; i++) {
                 if (arguments[i]) {
@@ -56,7 +56,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
         };
         epiiAdmin.call = function (stringOrCallable, data, inobject, obj) {
             if (!stringOrCallable) return null;
-            if (typeof  stringOrCallable == "string") {
+            if (typeof stringOrCallable == "string") {
                 if (!inobject) {
                     inobject = window;
                 }
@@ -64,7 +64,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
                     stringOrCallable = inobject[stringOrCallable];
                 }
             }
-            if (typeof  stringOrCallable == "function") {
+            if (typeof stringOrCallable == "function") {
                 return stringOrCallable.call(obj == undefined ? null : obj, data == undefined ? null : data);
 
             }
@@ -155,11 +155,11 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
                     var openwindow = $(layero).find("iframe")[0].contentWindow;
                     var close_wind_id = -1;
                     try {
-                        close_wind_id =   openwindow.Args.window_id;
+                        close_wind_id = openwindow.Args.window_id;
                     } catch (error) {
-                        
+
                     }
-                    
+
                     openwindow.open_layer = mylayer;
                     openwindow.open_layer_index = index;
                     openwindow.open_in_window = epiiAdmin.this_window;
@@ -173,25 +173,22 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
                     var that = this;
                     var close_wind_id = that.close_wind_id;
 
-                    if(close_wind_id==-1){
+                    if (close_wind_id == -1) {
                         that.mylayer.close(index);
-                    }else{
-                        function thisClose(){
+                    } else {
+                        function thisClose() {
                             that.mylayer.close(index);
                         }
-                        try {
-                            if(openwindow.onLayerClose){
-                                openwindow.onLayerClose(thisClose);
-                            }  else{
-                                thisClose();
-                            }
-                        } catch (e) {
 
+                        if (openwindow.onLayerClose) {
+                            openwindow.onLayerClose(thisClose);
+                        } else {
                             thisClose();
                         }
+
                     }
-                    
-     
+
+
                     return false;
                 }
 
@@ -214,9 +211,9 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
 
         epiiAdmin.ajax = function (options, success, error) {
 
-            options = typeof options === 'string' ? {url: options} : options;
-            var index = layer.load(0, {shade: 0.4});
-           // onOk = epiiAdmin.tools.getFunction(onOk, data, "onOk");
+            options = typeof options === 'string' ? { url: options } : options;
+            var index = layer.load(0, { shade: 0.4 });
+            // onOk = epiiAdmin.tools.getFunction(onOk, data, "onOk");
             options = $.extend({
                 type: "POST",
                 dataType: "json",
@@ -260,7 +257,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
                     icon: 3,
                     msg: "您确定要操作吗？",
                     offset: "auto",
-                    intop:true
+                    intop: true
                 }, data);
 
             if (!data['onOk']) {
@@ -278,7 +275,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
                 {
                     icon: 3,
                     msg: "您确定要操作吗？",
-                    intop:true,
+                    intop: true,
                     offset: "auto",
                     btn: [epiiAdmin.getTrueValue(data['btnOk'], "确定"), epiiAdmin.getTrueValue(data['btnCancel'], "取消")]
                 }, data);
@@ -304,21 +301,21 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
                     area: data.area ? data.area.split(",") : ['800px', '350px'],
                     btn: [epiiAdmin.getTrueValue(data['btnOk'], "确定"), epiiAdmin.getTrueValue(data['btnCancel'], "取消")]
                 }, data);
-                if (!data['onOk']) {
-                    data['onOk'] = "tag.a";
-                    
-                }
+            if (!data['onOk']) {
+                data['onOk'] = "tag.a";
+
+            }
             onOk = epiiAdmin.tools.getFunction(onOk, data, "onOk");
             onCancel = epiiAdmin.tools.getFunction(onCancel, data, "onCancel");
             epiiAdmin.tools.getLayer(data).prompt(data, function (value, index, elem) {
                 epiiAdmin.tools.getLayer(data).close(index);
-                if(data['onOk'] == "tag.a"){
+                if (data['onOk'] == "tag.a") {
                     var $this = $(data["this"]);
                     if (!$this.attr("url")) {
-                        $this.attr("url",$this.attr("href") || $this.attr("data-url"));
+                        $this.attr("url", $this.attr("href") || $this.attr("data-url"));
                     }
-                    
-                    if ($this.attr("href")) $this.attr("href", EpiiAdmin.tools.replaceInData($this.attr("url"), {value: value}));
+
+                    if ($this.attr("href")) $this.attr("href", EpiiAdmin.tools.replaceInData($this.attr("url"), { value: value }));
                     if ($this.attr("data-url")) $this.attr("data-url", $this.attr("href"));
                 }
                 if (onOk) onOk(value);
@@ -335,10 +332,10 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
                 var title = data['title'] ? data['title'] : ($a.attr("title") ? $a.attr("title") : null);
 
                 while (true) {
-                     
+
                     if (onok && data['ajax']) {
-                         
-                        epiiAdmin.ajax(epiiAdmin.tools.getUrlInTagA(dom),data['onAjaxSuccess']?data['onAjaxSuccess']:null);
+
+                        epiiAdmin.ajax(epiiAdmin.tools.getUrlInTagA(dom), data['onAjaxSuccess'] ? data['onAjaxSuccess'] : null);
                     } else if (onok && data['addtab']) {
                         epiiAdmin.openInTab(epiiAdmin.tools.getUrlInTagA(dom), title, data['addtab']);
                     } else if (onok && data['dialog']) {
@@ -476,11 +473,11 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
     }
 
 
-//auto form
+    //auto form
     epiiAdmin.bindWindow(this_window_id);
- 
 
-    
+
+
     var forms, tables, citys, selects, input_search, imgs_previews;
     if ((forms = $("form[data-form=1]")) && forms.length > 0) {
         require(['form'], function (Form) {
@@ -521,13 +518,13 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
     require(['epii-upload-init'], function (upload) {
 
         upload.init();
-    })  
-    
-   
+    })
 
 
 
-//auto a or btn
+
+
+    //auto a or btn
 
 
     var jbody = $("body");
@@ -628,4 +625,4 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
     window.EpiiAdmin = epiiAdmin;
     return epiiAdmin;
 })
-;
+    ;
