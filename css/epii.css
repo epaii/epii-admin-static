@@ -115,6 +115,7 @@
 
 .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-treeview {
     background: transparent;
+    padding-left: 10px;
 }
 
 .sidebar-dark-primary .nav-header {
