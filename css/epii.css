@@ -115,8 +115,13 @@
 
 .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-treeview {
     background: transparent;
+}
+.nav-sidebar > .nav-item > .nav-treeview {
     padding-left: 13px;
 }
+
+
+
 
 .sidebar-dark-primary .nav-header {
     color: #d0d4db;
