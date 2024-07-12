@@ -131,8 +131,9 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
 
 
         epiiAdmin.openInDialog = function (url, title, intop, area) {
-            intop = intop ? intop : epiiAdmin.tools.query("intop", url);
-
+           
+            intop =  intop ? intop : epiiAdmin.tools.query("intop", url);
+           
             title = title ? title : epiiAdmin.tools.query("title", url);
 
             var offset = epiiAdmin.tools.query("_offset", url);
@@ -141,6 +142,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
             }
 
             var mylayer = epiiAdmin.tools.getLayer(intop);
+            console.log(mylayer,"mylayermylayermylayer")
             var index = mylayer.open({
                 type: 2,
                 title: title,
@@ -435,7 +437,7 @@ define(['args', "jquery", "layer", "eval"], function (Args, $, layer, epii_eval)
                     intop = intopOrData;
                 }
 
-                return intop ? layer : epiiAdmin.this_window.layer;
+                return intop ? window.top.layer : epiiAdmin.this_window.layer;
             },
             getColumn: function (arr, key) {
                 var ret = []

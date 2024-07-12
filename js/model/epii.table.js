@@ -4,7 +4,7 @@
 
 
 
-define(['bootstrap-table', "jquery"], function (bTable, $) {
+define(['bootstrap-table', "jquery","args"], function (bTable, $,Args) {
 
 
     var defualt_table = null;
@@ -82,8 +82,8 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
             out.do[run].call(dom, selectids, selectall);
             return;
         }
-
-        if (window.hasOwnProperty(run)) {
+       
+        if (run && window.hasOwnProperty(run)) {
             window[run].call(dom, selectids, selectall);
             return;
         }
@@ -360,6 +360,24 @@ define(['bootstrap-table', "jquery"], function (bTable, $) {
         }
         return _html;
     };
+     
+    formatter.mapValue =function(value, row, index, field) {
+        if(Args.pluginsData.epii_table_map_values){
+            var mapkey = this["mapKey"]?this["mapKey"]:field;
+            if(Args.pluginsData.epii_table_map_values[mapkey+"_color"]){
+                row[field+"_color"] = Args.pluginsData.epii_table_map_values[mapkey+"_color"][value];
+            }
+             
+            if(Args.pluginsData.epii_table_map_values[filedName(field,"bgColor")]){
+                row[filedName(field,"bgColor")] = Args.pluginsData.epii_table_map_values[filedName(field,"bgColor")][value];
+            }
+            
+            arguments[0] = Object.prototype.hasOwnProperty.call(Args.pluginsData.epii_table_map_values,mapkey)?Args.pluginsData.epii_table_map_values[mapkey][value]:value;
+        }
+        return formatter.apply(this, arguments);
+ 
+    }
+   
     out.formatter = out.epiiFormatter = formatter;
     window.epiiFormatter = formatter;
     window.epii_table = out;
